@@ -1,0 +1,22 @@
+.landing-page-body {
+    /* background-color: rgb(106, 97, 85); */
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+}
+.body-leftside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    padding-left: 50px;
+}
+
+.landing-page-tagline-text{
+    font-size: 55px;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.747);
+    font-family: "glacial-bold";
+}

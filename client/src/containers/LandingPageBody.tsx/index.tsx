@@ -1,6 +1,7 @@
 import React from 'react'
 import "./index.css"
 
+import {AppForm} from '../../components'
 
 const LandingPageBody = () =>{
     return (
@@ -8,18 +9,15 @@ const LandingPageBody = () =>{
             <div className="landing-page-body">
                 <div className="body-leftside">
                     <p className="landing-page-tagline-text">
-                        Solusi praktis untuk business lokal
+                        Solusi tepat untuk bisnis lokal
                     </p>
                 </div>
                 <div className="body-rightside">
-                    <p>
-                        
-                    </p>
+                    <AppForm/>
                 </div>
                 
             </div>
         </>
     )
 }
-
 export default LandingPageBody

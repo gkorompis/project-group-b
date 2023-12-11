@@ -13,10 +13,18 @@
 
     padding-left: 50px;
 }
+.body-rightside{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding-top: 0px;
+    padding-left: 150px;
+}
 
 .landing-page-tagline-text{
-    font-size: 55px;
+    font-size: 80px;
     letter-spacing: 3px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.747);
-    font-family: "glacial-bold";
+    /* text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.747); */
+    font-family: "arcon-rounded";
 }

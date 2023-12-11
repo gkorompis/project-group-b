@@ -1,0 +1,30 @@
+.login-form{
+    /* background-color: rgba(30, 31, 30, 0.488); */
+    width: 300px;
+    border-radius: 4px;
+    padding: 50px;
+}
+.form-title{
+    font-family: "arcon-rounded";
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.form-group{
+    margin-bottom: 17px;
+    display: flex;
+    flex-direction: column;
+}
+.form-label{
+    font-family: "arcon-rounded";
+    font-size: 17px;
+    color: aliceblue;
+    margin-bottom: 4px;
+}
+.form-control{
+    border: none;
+    outline: none;
+    height: 20px;
+    width: 300px;
+    border-radius: 3px;
+    padding: 7px;
+}

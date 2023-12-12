@@ -1,8 +1,14 @@
 import React, {useEffect} from 'react'
 import "./index.css"
 import { Link, Element, scroller } from 'react-scroll';
+import { useNavigate } from 'react-router-dom';
 
 const CustomNavbar = () =>{
+        const navigate = useNavigate();
+
+        const handleLoginPage = () =>{
+            navigate("/login")
+        };
   
         const scrollToPage = (page:any) =>{
             const doc = document as any
@@ -58,7 +64,7 @@ const CustomNavbar = () =>{
                     {/* <a href="#" className="anchors anchor-text">
                        login
                     </a> */}
-                    <span className="anchors-span anchor-text">
+                    <span className="anchors-span anchor-text" onClick={handleLoginPage}>
                         login
                     </span>
                 </div>

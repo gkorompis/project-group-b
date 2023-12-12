@@ -1,1 +1,1 @@
-export { default as LandingPageBody } from './LandingPageBody.tsx'
+export { default as LandingPageBody } from './LandingPageBody'

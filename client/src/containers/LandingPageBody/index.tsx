@@ -9,11 +9,15 @@ import money2 from '../../assets/app-icons/salary.png'
 import people from '../../assets/app-icons/people-network.png'
 
 import {AppForm} from '../../components'
+import { useNavigate } from 'react-router-dom'
 
 
 const LandingPageBody = () =>{
     
-    
+    const navigate = useNavigate();
+    const handleSpanRegister =()=>{
+        navigate('/register')
+    };
     return (
         <>
             <div className="landing-page-body">
@@ -22,7 +26,7 @@ const LandingPageBody = () =>{
                     <p className="landing-page-tagline-text">
                         Solusi tepat untuk bisnis lokal
                     </p>
-                    <span className="landing-page-span" >
+                    <span className="landing-page-span" onClick={handleSpanRegister} >
                         mulai disini
                     </span>
                     </div>

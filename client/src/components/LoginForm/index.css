@@ -1,0 +1,71 @@
+.login-form{
+    background-color: #FFFFFF;
+    /* width: 80px; */
+    border-radius: 20px;
+    box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.127);
+    padding-block: 50px;
+    padding-inline: 100px;
+    padding-bottom: 60px;
+
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center;
+    align-items: end; */ 
+}
+.form-body{
+    display: flex;
+    flex-direction: column;
+}
+.form-title{
+    font-family: "arcon-rounded";
+    font-size: 40px;
+    margin-bottom: 40px;
+    color: rgba(55, 53, 53, 0.779);
+    letter-spacing: 4px;
+    cursor: pointer;
+}
+.form-group{
+    margin-bottom: 17px;
+    display: flex;
+    flex-direction: column;
+}
+.form-label{
+    font-family: "arcon-rounded";
+    font-size: 17px;
+    color: rgba(55, 53, 53, 0.779);
+    margin-bottom: 4px;
+}
+.form-control{
+    background-color: #FFFFFF;
+    border: none;
+    outline: solid 1px rgba(54, 52, 52, 0.214);
+    height: 40px;
+    width: 300px;
+    border-radius: 3px;
+    padding: 7px;
+    color: rgba(55, 53, 53, 0.779);
+    font-family: "arcon-rounded";
+    font-size: 19px;
+    /* background-color: aliceblue; */
+}
+.form-button{
+    margin-top: 4vh;
+    /* background-color: rgb(48, 46, 46); */
+    background-color: #30475E;
+    color: aliceblue;
+    border: none;
+    outline: none;
+    padding-block: 10px;
+    padding-inline: 15px;
+    border-radius: 5px;
+    align-self: end;
+    width: 10vw;
+    font-size: 17px;
+    cursor: pointer;
+}
+.text-danger{
+    font-family: "arcon-rounded";
+    font-size: 17px;
+    color: rgba(193, 33, 33, 0.779);
+    margin-top: 4px;
+}

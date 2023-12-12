@@ -1,16 +1,16 @@
 .page-landing-page-blank{
     width: 100vw;
-    height: 100vh;
-    background-color: rgb(35, 217, 227);
+    height: 100%;
+    background-color: rgb(73, 171, 176);
 }
 .page-navbar{
-    background-color: rgba(100, 99, 99, 0.377);
+    /* background-color: rgba(100, 99, 99, 0.377); */
     width: 100%;
     height: 11vh;
 }
 .page-body{
-    background-color: #45474b00;
-    background-color: rgba(100, 99, 99, 0.377);
-    height: 89vh;
+    /* background-color: #45474b00; */
+    /* background-color: rgba(100, 99, 99, 0.377); */
+    height: 100%;
 }
 

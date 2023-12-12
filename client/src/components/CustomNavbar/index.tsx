@@ -8,7 +8,7 @@ const CustomNavbar = () =>{
             <nav className="custom-navbar">
                 <div className="navbar-leftside">
                     <a href="#" className="anchors anchor-logo">
-                        lorem
+                        handpos
                     </a>
                     <a href="#" className="anchors anchor-text">
                         solutions

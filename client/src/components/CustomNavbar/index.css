@@ -39,3 +39,15 @@
     /* text-shadow: 1px 1px 2px black; */
     letter-spacing: 0.3px;
 }
+.anchors-span {
+    font-family: "arcon-rounded";
+    letter-spacing: 2px;
+    background-color: rgb(113, 113, 113);
+    padding-inline: 15px;
+    padding-block: 9px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.anchors-span:active{
+    background-color: rgb(124, 125, 120);
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import "./index.css"
 
 import landingPageLogo from '../../assets/app-icons/mobile-store.png'
@@ -10,7 +10,10 @@ import people from '../../assets/app-icons/people-network.png'
 
 import {AppForm} from '../../components'
 
+
 const LandingPageBody = () =>{
+    
+    
     return (
         <>
             <div className="landing-page-body">
@@ -28,7 +31,7 @@ const LandingPageBody = () =>{
                         <img className="landing-page-img" src={landingPageLogo} />
                     </div>
                 </div>
-                <div className="grid-row grid-row-2">
+                <div id="business-solutions" className="grid-row grid-row-2">
                     <div className="grid-row-head">
                         <p className="grid-row-head-text">Business Solutions</p>
                     </div>
@@ -56,7 +59,7 @@ const LandingPageBody = () =>{
                         </div>
                     </div>
                 </div>
-                <div className="grid-row grid-row-3">
+                <div id="our-stories"  className="grid-row grid-row-3">
                     <div className="row-3-body row-3-body-1">
                         <img className="row-3-body-img" src={people}></img>
                     </div>

@@ -4,6 +4,7 @@ import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { 
+  DashboardPage,
   LandingPage, 
   LandingPageBlank,
   LoginPage,
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<LandingPageBlank/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/dashboard" element={<DashboardPage/>}/>
       </Routes>
     </BrowserRouter>
   );

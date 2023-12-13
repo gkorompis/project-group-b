@@ -25,3 +25,19 @@ export interface CustomizedFormProps <T> {
     cb?: any,
     isCancelButton: boolean
 }
+
+// containers/DashboardCardDeck
+export interface DashboardCardDeckProps {
+  handler: any
+}
+
+// components/DashboardCard
+export interface DashboardCardProps {
+  data: any
+};
+
+// componenets/ProductCard
+export interface ProductCardProps {
+  data: any,
+  handler: any
+}

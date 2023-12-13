@@ -35,3 +35,9 @@ export interface DashboardCardDeckProps {
 export interface DashboardCardProps {
   data: any
 };
+
+// componenets/ProductCard
+export interface ProductCardProps {
+  data: any,
+  handler: any
+}

@@ -1,0 +1,53 @@
+
+.custom-navbar {
+    /* background-color:rgb(97, 125, 149) ; */
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 90px;
+}
+
+.navbar-text{
+    color:aliceblue;
+}
+.anchors {
+    margin-right: 30px;
+    /* font-family: "font-league-spartan"; */
+    font-family: "arcon-rounded";
+    /* vertical-align: middle; */
+    /* text-shadow: 2px 2px 4px rgba(0, 1, 1, 0.911); */
+    /* text-shadow: 1px 1px 2px black */
+    
+}
+.anchors:active{
+    color: rgb(110, 114, 117);
+}
+.anchor-logo {
+    color: aliceblue;
+    font-size: 30px;
+    letter-spacing: 5px;
+    /* text-shadow: 1px 1px 2px black; */
+    /* vertical-align: middle; */
+    /* text-shadow: 1px 1px 2px black */
+    margin-right: 50px;
+}
+.anchor-text {
+    color: aliceblue;
+    font-size: 21px;
+    /* text-shadow: 1px 1px 2px black; */
+    letter-spacing: 0.3px;
+}
+.anchors-span {
+    font-family: "arcon-rounded";
+    letter-spacing: 2px;
+    background-color: rgb(113, 113, 113);
+    padding-inline: 15px;
+    padding-block: 9px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.anchors-span:active{
+    background-color: rgb(124, 125, 120);
+}

@@ -41,3 +41,8 @@ export interface ProductCardProps {
   data: any,
   handler: any
 }
+
+// pages/AddToBasketPage 
+export interface AddToBasketPageProps {
+  handler: any
+}

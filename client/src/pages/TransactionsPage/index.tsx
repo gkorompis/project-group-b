@@ -3,10 +3,17 @@ import {useState} from 'react'
 import { productList } from "./data";
 import { SearchBar, ProductCard } from "../../components";
 import { imgBasket } from "../../assets/app-icons";
+import AddToBasketPage from "../AddToBasketPage";
 
 const TransactionsPage = () =>{
 
     const [totalItem, setTotalItem] = useState(0);
+    const [isBasket, setIsBasket] = useState(false);
+
+
+    const handleAddToBasketPage = () =>{
+        setIsBasket(prevState => !prevState);
+    };
     console.log(">>>totalItem", totalItem)
 
     return(
@@ -30,7 +37,7 @@ const TransactionsPage = () =>{
                         })
                     }
                 </div>
-                <div className="floating-div">
+                <div className="floating-div" onClick={handleAddToBasketPage}>
                     {
                         totalItem ? 
                         <div className="basket-count">
@@ -44,6 +51,11 @@ const TransactionsPage = () =>{
                    
                 </div>  
             </div>
+            {
+                isBasket ?   <AddToBasketPage handler={handleAddToBasketPage}/> : null
+            }
+           
+
         </>
     )
 }

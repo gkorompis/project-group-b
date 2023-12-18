@@ -32,7 +32,7 @@ const defaultRoutes = [
     route: productRoute
   },
   {
-    path: 'transactions',
+    path: '/transactions',
     route: transactionRoute
   },
 ];

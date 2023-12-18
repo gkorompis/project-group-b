@@ -14,3 +14,5 @@
 
 ### Add To Basket Page
 <img width="1383" alt="Screen Shot 2023-12-14 at 15 50 58" src="https://github.com/gkorompis/project-group-b/assets/52250424/b7d93158-f980-4045-86a5-0c88b53e4e61">
+
+<img width="1408" alt="Screen Shot 2023-12-19 at 00 53 41" src="https://github.com/gkorompis/project-group-b/assets/52250424/6f651e77-676a-4c14-868b-24abda71b9d2">

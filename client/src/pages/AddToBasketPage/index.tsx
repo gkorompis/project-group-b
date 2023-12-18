@@ -1,72 +1,33 @@
 import "./index.css"
 
-import { AddToBasketPageProps } from "../../utils/types";
+import { AddToBasketPageProps, BasketItem } from "../../utils/types";
+import { date } from "yup";
 
-const listOrder = [
-    {
-        title: "Blue Shirt", 
-        totalQuantity: 5,
-        totalPrices: 12500
-    },
-    {
-        title: "Jacket", 
-        totalQuantity: 5,
-        totalPrices: 750000
-    },
-    {
-        title: "Sunglass", 
-        totalQuantity: 5,
-        totalPrices: 103250
-    },
-    {
-        title: "Blue Shirt", 
-        totalQuantity: 5,
-        totalPrices: 12500
-    },
-    {
-        title: "Jacket", 
-        totalQuantity: 5,
-        totalPrices: 750000
-    },
-    {
-        title: "Sunglass", 
-        totalQuantity: 5,
-        totalPrices: 103250
-    },
-    {
-        title: "Blue Shirt", 
-        totalQuantity: 5,
-        totalPrices: 12500
-    },
-    {
-        title: "Jacket", 
-        totalQuantity: 5,
-        totalPrices: 750000
-    },
-    {
-        title: "Sunglass", 
-        totalQuantity: 5,
-        totalPrices: 103250
-    },
-    {
-        title: "Blue Shirt", 
-        totalQuantity: 5,
-        totalPrices: 12500
-    },
-    {
-        title: "Jacket", 
-        totalQuantity: 5,
-        totalPrices: 750000
-    },
-    {
-        title: "Sunglass", 
-        totalQuantity: 5,
-        totalPrices: 103250
+
+
+
+
+
+const AddToBasketPage = ({handler, states}:AddToBasketPageProps) =>{
+
+
+    const listBasketItems:BasketItem[] = states && states.basketItems;
+    const totalItem = states && states.totalItem;
+    const totalItemPriceAll = listBasketItems && listBasketItems.reduce((acc:any, currentItem:any):any => {
+        return acc + currentItem.totalItemPrice;
+    }, 0);
+
+    const checkoutItems = () =>{
+        const checkoutDoc = {
+            titleProducts: listBasketItems,
+            prices: totalItemPriceAll,
+            quantity: totalItem,
+            orderDate: new Date(),
+            links: "",
+            status: "paid"
+        }
+        console.log(">>>>checkoutDoc -", checkoutDoc)
     }
-]
-
-const AddToBasketPage = ({handler}:AddToBasketPageProps) =>{
-
 
     return (
         <>
@@ -76,7 +37,7 @@ const AddToBasketPage = ({handler}:AddToBasketPageProps) =>{
                     <p className="add-to-basket-title-text">Order Summary</p>
                     <div className="order-card-deck">
                         {
-                            listOrder.map((x:any, key:any)=>{
+                            listBasketItems.map((x:BasketItem, key:any)=>{
                                 return (
                                     <>
                                         <OrderCard data={x}/>
@@ -88,8 +49,8 @@ const AddToBasketPage = ({handler}:AddToBasketPageProps) =>{
                     </div>
                      <div className="order-total">
                         <p className="order-total-text">Total</p>
-                        <p className="order-total-text">Rp. 1553500</p>
-                        <span className="order-checkout-span order-total-text">checkout</span>
+                        <p className="order-total-text">Rp. {totalItemPriceAll}</p>
+                        <span className="order-checkout-span order-total-text" onClick={checkoutItems}>checkout</span>
                     </div>
                 </div>
             </div>
@@ -98,17 +59,17 @@ const AddToBasketPage = ({handler}:AddToBasketPageProps) =>{
 };
 
 interface OrderCardProps {
-    data: any
+    data: BasketItem
 }
 
 const OrderCard = ({data}:OrderCardProps) =>{
-    const {title, totalQuantity, totalPrices} = data;
+    const {totalItemPrice, itemId, itemName, addedItems} = data;
     return (
         <>
             <div className="order-card">
-                <div className="order-card-box order-card-counts">{totalQuantity}x</div>
-                <div className="order-card-box order-card-item">{title}</div>
-                <div className="order-card-box order-card-prices">Rp. {totalPrices}</div>
+                <div className="order-card-box order-card-counts">{addedItems}x</div>
+                <div className="order-card-box order-card-item">{itemName}</div>
+                <div className="order-card-box order-card-prices">Rp. {totalItemPrice}</div>
             </div>
         </>
     )

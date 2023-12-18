@@ -39,10 +39,19 @@ export interface DashboardCardProps {
 // componenets/ProductCard
 export interface ProductCardProps {
   data: any,
-  handler: any
+  handlers: any,
+  states: any
 }
 
 // pages/AddToBasketPage 
 export interface AddToBasketPageProps {
-  handler: any
+  handler: any,
+  states: any
+}
+
+export interface BasketItem {
+  addedItems: number,
+  itemId: string,
+  itemName: string
+  totalItemPrice: number
 }

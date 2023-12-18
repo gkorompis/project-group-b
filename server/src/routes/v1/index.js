@@ -26,7 +26,15 @@ const defaultRoutes = [
   {
     path: '/stores',
     route: storeRoute
-  }
+  },
+  {
+    path: '/products',
+    route: productRoute
+  },
+  {
+    path: 'transactions',
+    route: transactionRoute
+  },
 ];
 
 const devRoutes = [

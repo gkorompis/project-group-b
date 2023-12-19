@@ -45,7 +45,7 @@ export interface ProductCardProps {
 
 // pages/AddToBasketPage 
 export interface AddToBasketPageProps {
-  handler: any,
+  handlers: any,
   states: any
 }
 
@@ -54,4 +54,9 @@ export interface BasketItem {
   itemId: string,
   itemName: string
   totalItemPrice: number
+}
+
+// actions
+export interface ProductActionProps {
+  reduxState?:any
 }

@@ -1,0 +1,1 @@
+export { default as productAction } from './productAction'

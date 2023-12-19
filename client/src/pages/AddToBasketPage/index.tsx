@@ -1,15 +1,16 @@
 import "./index.css"
 
 import { AddToBasketPageProps, BasketItem } from "../../utils/types";
-import { date } from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { productAction } from "../../actions";
+import { productList } from "../../utils/data";
+import reloadProductAction from "../../actions/reloadProductAction";
 
 
-
-
-
-
-const AddToBasketPage = ({handler, states}:AddToBasketPageProps) =>{
-
+const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
+    // reduxs
+    const dispatch = useDispatch();
+    const {setBasketItems, setIsBasket, setTotalItem} = handlers
 
     const listBasketItems:BasketItem[] = states && states.basketItems;
     const totalItem = states && states.totalItem;
@@ -17,7 +18,11 @@ const AddToBasketPage = ({handler, states}:AddToBasketPageProps) =>{
         return acc + currentItem.totalItemPrice;
     }, 0);
 
-    const checkoutItems = () =>{
+    const checkoutItems = async (totalItem:any) =>{
+        if (!totalItem) {
+            return dispatch(productAction({}) as unknown as any);
+            // return setIsBasket(false);
+        }
         const checkoutDoc = {
             titleProducts: listBasketItems,
             prices: totalItemPriceAll,
@@ -26,12 +31,20 @@ const AddToBasketPage = ({handler, states}:AddToBasketPageProps) =>{
             links: "",
             status: "paid"
         }
+        setTotalItem(0);
+        setBasketItems([]);
+        setIsBasket(false);
         console.log(">>>>checkoutDoc -", checkoutDoc)
+        const reduxState = productList
+        // await dispatch(productAction({reduxState}) as unknown as any);
+        dispatch({type: "PRODUCTS_LOADING"})
+        dispatch(reloadProductAction(reduxState) as any)
+        console.log(">>>addToBasketPage", "dispatch")
     }
 
     return (
         <>
-            <div className="add-to-basket-page bg-blur" onClick={handler}>
+            <div className="add-to-basket-page bg-blur">
                 <div className="add-to-basket-review">
                     <p className="add-to-basket-logo-text">handpos</p>
                     <p className="add-to-basket-title-text">Order Summary</p>
@@ -50,7 +63,7 @@ const AddToBasketPage = ({handler, states}:AddToBasketPageProps) =>{
                      <div className="order-total">
                         <p className="order-total-text">Total</p>
                         <p className="order-total-text">Rp. {totalItemPriceAll}</p>
-                        <span className="order-checkout-span order-total-text" onClick={checkoutItems}>checkout</span>
+                        <span className="order-checkout-span order-total-text" onClick={()=> checkoutItems(totalItem)}>checkout</span>
                     </div>
                 </div>
             </div>

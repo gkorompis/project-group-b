@@ -60,3 +60,6 @@ export interface BasketItem {
 export interface ProductActionProps {
   reduxState?:any
 }
+export interface TokenActionProps {
+  reduxState?:any
+}

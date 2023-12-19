@@ -13,6 +13,7 @@ const TransactionsPage = () =>{
     const dispatch = useDispatch();
     const selectorProduct = useSelector((state:any)=> state.products);
     const selectorReloadProduct = useSelector((state:any)=> state.reloadProduct);
+    const selectorToken = useSelector((state:any)=> state.tokens);
 
     // states
     const [totalItem, setTotalItem] = useState(0);
@@ -20,40 +21,42 @@ const TransactionsPage = () =>{
     const [basketItems, setBasketItems ] = useState([]);
 
     // handlers
-    const handleAddItem = ({title, prices, quantity, _id}:any) =>{
-        const fetchedProduct = basketItems.filter((x:any)=>x.itemId == _id)[0] || {};
+    const handleAddItem = ({title, price, quantity, uniqueId}:any) =>{
+    
+        const fetchedProduct = basketItems.filter((x:any)=>x.itemId == uniqueId)[0] || {};
         let {addedItems, totalItemPrice, itemId, itemName} = fetchedProduct;
 
         const tempAddedItems = addedItems ? addedItems+1 : 1;
-        const tempTotalItemPrice = tempAddedItems * prices;
+        const tempTotalItemPrice = tempAddedItems * +price;
         
         const tempBasketItem = {
-            itemId: _id,
+            itemId: uniqueId,
             itemName: title,
             addedItems: tempAddedItems,
             totalItemPrice: tempTotalItemPrice,
         }
 
         setBasketItems((prevState):any => {
-            prevState = fetchedProduct ? prevState.filter((x:any) => x.itemId !== _id) : prevState
+            prevState = fetchedProduct ? prevState.filter((x:any) => x.itemId !== uniqueId) : prevState
             return [...prevState, tempBasketItem];
         })    
     }
-    const handleRemoveItem = ({title, prices, quantity, _id}:any) =>{
-        const fetchedProduct = basketItems.filter((x:any)=>x.itemId == _id)[0] || {};
+    const handleRemoveItem = ({title, price, quantity, uniqueId}:any) =>{
+       
+        const fetchedProduct = basketItems.filter((x:any)=>x.itemId == uniqueId)[0] || {};
         let {addedItems, totalItemPrice, itemId, itemName} = fetchedProduct;
 
         const tempAddedItems = addedItems ? addedItems-1 : 0;
-        const tempTotalItemPrice = tempAddedItems * prices;
+        const tempTotalItemPrice = tempAddedItems * +price;
         
         const tempBasketItem = {
-            itemId: _id,
+            itemId: uniqueId,
             itemName: title,
             addedItems: tempAddedItems,
             totalItemPrice: tempTotalItemPrice,
         }
         setBasketItems((prevState):any => {
-            prevState = fetchedProduct ? prevState.filter((x:any) => x.itemId !== _id) : prevState
+            prevState = fetchedProduct ? prevState.filter((x:any) => x.itemId !== uniqueId) : prevState
             return tempAddedItems ?  [...prevState, tempBasketItem] : [...prevState];
         })  
     };
@@ -81,11 +84,18 @@ const TransactionsPage = () =>{
     const productError = selectorProduct && selectorProduct.error
     const productPayload = selectorProduct && selectorProduct.payload
     
+    const tokenLoading = selectorToken && selectorToken.loading
+    const tokenError = selectorToken && selectorToken.error
+    const tokenPayload = selectorToken && selectorToken.payload
+    
     console.log("productloading", productLoading)
     // hooks
     useEffect(()=>{
         console.log("!!!!! useEffect TransactionPage triggered")
-        dispatch(productAction({}) as unknown as any)
+        const tokens = tokenPayload && tokenPayload[0];
+        const access = tokens && tokens.access;
+        const token = access && access.token;
+        dispatch(productAction({reduxState: token}) as unknown as any)
     }, [dispatch, selectorReloadProduct])
     return(
         <>

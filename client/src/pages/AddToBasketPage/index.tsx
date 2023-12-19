@@ -62,7 +62,7 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
                     </div>
                      <div className="order-total">
                         <p className="order-total-text">Total</p>
-                        <p className="order-total-text">Rp. {totalItemPriceAll}</p>
+                        <p className="order-total-text">IDR {totalItemPriceAll}</p>
                         <span className="order-checkout-span order-total-text" onClick={()=> checkoutItems(totalItem)}>checkout</span>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ const OrderCard = ({data}:OrderCardProps) =>{
             <div className="order-card">
                 <div className="order-card-box order-card-counts">{addedItems}x</div>
                 <div className="order-card-box order-card-item">{itemName}</div>
-                <div className="order-card-box order-card-prices">Rp. {totalItemPrice}</div>
+                <div className="order-card-box order-card-prices"> {totalItemPrice}</div>
             </div>
         </>
     )

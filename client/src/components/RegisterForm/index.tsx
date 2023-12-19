@@ -3,14 +3,17 @@ import * as Yup from 'yup';
 import "./index.css"
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+import axios from "axios"
+import { BASE_URL } from '../../utils/global';
+
+const RegisterForm = () => {
 
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     fullname: '',
-    email: '',
     username: '',
+    email: '',
     password: ''
   }) as any
 
@@ -25,8 +28,8 @@ const LoginForm = () => {
 
   const validationSchema = Yup.object().shape({
     fullname: Yup.string().required('This field is required'),
+    username: Yup.string().required('This field is required'),
     email: Yup.string().email('Invalid email').required('This field is required'),
-    username: Yup.string().required('This field required'),
     password: Yup.string().required('This field required')
                 .min(8, 'Password must be at least 8 characters')
                 .matches(
@@ -43,18 +46,25 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     validationSchema
       .validate(formData, { abortEarly: false })
-      .then(() => {
+      .then( async () => {
         console.log('Form submitted:', formData);
         setFormData({
         fullname: '',
-        email: '',
         username: '',
+        email: '',
         password: ''
       });
+      // post route
+      try {
+        const response = await axios.post(`${BASE_URL}/auth/register`, formData); 
+      
+      } catch(err) {
+        console.log(err)
+      }
       setErrors({}); 
       })
       .catch((validationErrors) => {
@@ -71,8 +81,8 @@ const LoginForm = () => {
   }
   const fields = [
     {name: "fullname", type: "text", label: "Full Name", onChange: handleChange},
-    {name: "email", type: "email", label: "Email", onChange: handleChange},
     {name: "username", type: "text", label: "Username", onChange: handleChange},
+    {name: "email", type: "email", label: "Email", onChange: handleChange},
     {name: "password", type: "password", label: "Password", onChange: handleChange}
   ]
   return (
@@ -106,4 +116,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

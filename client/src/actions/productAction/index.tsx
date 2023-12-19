@@ -2,6 +2,9 @@ import { Dispatch } from "redux"
 import { itemBox } from "../../assets/app-icons";
 import { ProductActionProps } from "../../utils/types";
 
+import axios from 'axios';
+import { BASE_URL } from '../../utils/global';
+
 const actionTypes = {
     loading: 'PRODUCTS_LOADING',
     success: 'PRODUCTS_SUCCESS',
@@ -70,8 +73,22 @@ const productAction = ({reduxState}:ProductActionProps)=> async(dispatch:Dispatc
     try {
         console.log(">>>productAction")
         dispatch({type: actionTypes.loading});
-        // console.log(">>>productAction",actionTypes.loading)
-        const payload = reduxState || dummyProducts;
+       
+        // get route
+        const token = reduxState;
+        const config = {
+          headers: {Authorization: `Bearer ${token}`}
+        }
+        const bodyParameters = {
+          key: "value"
+        };
+
+        const responseGetProduct = await axios.get(`${BASE_URL}/products`)
+        console.log(">>>", {responseGetProduct})
+        const {data} = responseGetProduct;
+        const listProducts = data && data.results;
+
+        const payload = listProducts || dummyProducts;
         dispatch({type: actionTypes.success, payload})
         // console.log(">>>productAction",actionTypes.success)
     } catch(error:any) {

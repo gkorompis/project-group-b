@@ -9,22 +9,21 @@ import { BASE_URL } from '../../utils/global';
 import { useDispatch } from 'react-redux';
 import { tokenAction } from '../../actions';
 
+
 const LoginForm = () => {
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async (formData:any)=>{
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, formData);
       console.log(">>> auth/login response:", response);
+
       const data = response && response.data;
       const tokens = data && data.tokens;
-      const reduxState = [{tokens}];
-
-      const access = tokens && tokens.access;
-      const token = access && access.token;
-
-      axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
-      
+      const reduxState = {tokens};
       dispatch(tokenAction({reduxState}) as any)
 
       navigate('/dashboard')

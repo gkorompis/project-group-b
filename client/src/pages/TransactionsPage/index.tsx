@@ -1,19 +1,25 @@
 import "./index.css"
 import {useEffect, useState} from 'react'
-import { SearchBar, ProductCard } from "../../components";
+import { SearchBar, ProductCard, EmptyCollection } from "../../components";
 import { imgBasket } from "../../assets/app-icons";
 import {AddToBasketPage} from "..";
 
 import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../actions";
+import { useNavigate } from "react-router-dom";
+import { cookies } from "../../utils/global";
 
 
 const TransactionsPage = () =>{
+    // hooks
+    const navigate = useNavigate();
+    const cookiesAll = cookies.getAll();
+    const {accessToken} = cookiesAll;
+
     // reduxs
     const dispatch = useDispatch();
     const selectorProduct = useSelector((state:any)=> state.products);
     const selectorReloadProduct = useSelector((state:any)=> state.reloadProduct);
-    const selectorToken = useSelector((state:any)=> state.tokens);
 
     // states
     const [totalItem, setTotalItem] = useState(0);
@@ -84,18 +90,12 @@ const TransactionsPage = () =>{
     const productError = selectorProduct && selectorProduct.error
     const productPayload = selectorProduct && selectorProduct.payload
     
-    const tokenLoading = selectorToken && selectorToken.loading
-    const tokenError = selectorToken && selectorToken.error
-    const tokenPayload = selectorToken && selectorToken.payload
-    
     console.log("productloading", productLoading)
     // hooks
     useEffect(()=>{
         console.log("!!!!! useEffect TransactionPage triggered")
-        const tokens = tokenPayload && tokenPayload[0];
-        const access = tokens && tokens.access;
-        const token = access && access.token;
-        dispatch(productAction({reduxState: token}) as unknown as any)
+        const token = accessToken
+        dispatch(productAction({reduxState: {token}}) as unknown as any)
     }, [dispatch, selectorReloadProduct])
     return(
         <>
@@ -105,22 +105,26 @@ const TransactionsPage = () =>{
                 </div>
                 
                 {/* list products */}
-                <div className="product-card-deck">
+                
+                
                     
                     {
                         productLoading ? <h1>loading...</h1> : 
-                        productError ? <h1>error...</h1> :
-                        productPayload.map((x:any, key:any)=>{
+                        productError ? <EmptyCollection/> :
+                        <div className="product-card-deck">{
+                            productPayload.map((x:any, key:any)=>{
                             return (
-                                <>
-                                    <div className="card-deck-group">
-                                        <ProductCard data={x} handlers={handlers} states={states}/>
-                                    </div>
-                                </>
-                            )
-                        })
+                                    <>
+                                        <div className="card-deck-group">
+                                            <ProductCard data={x} handlers={handlers} states={states}/>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                        </div>
                     }
-                </div>
+                
                 <div className="floating-div" onClick={handleAddToBasketPage}>
                     {
                         totalItem ? 

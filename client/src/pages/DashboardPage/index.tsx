@@ -3,9 +3,23 @@ import { DashboardCardDeck } from '../../containers';
 import "./index.css"
 import TransactionsPage from '../TransactionsPage';
 
-const DashboardPage = ()=>{
-    const [board, setBoard] = useState("");
+import { useDispatch } from 'react-redux';
+import { tokenAction } from '../../actions';
+import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
+import { cookies } from '../../utils/global';
 
+const DashboardPage = ()=>{
+    // hooks
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const cookiesAll = cookies.getAll();
+    const {accessToken} = cookiesAll;
+
+    // states
+    const [board, setBoard] = useState("");
+    
+    // handlers
     const handler = (e:any)=>{
         const id = e.target && e.target.id;
         console.log(">>>on clicked:",id)
@@ -32,13 +46,20 @@ const DashboardPage = ()=>{
                         </div>)
         }
     }
+
+    // useEffect
+    useEffect(()=>{
+        if(!accessToken){
+            navigate("/")
+        }
+    }, [])
     return (
         <>
-            <div className='dashboard-page'>
-                {
-                    switchBoard(board)
-                }
-            </div>
+                <div className='dashboard-page'>
+                    {
+                        switchBoard(board)
+                    }
+                </div>
         </>
     )
 };

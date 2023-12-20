@@ -1,15 +1,19 @@
 const Joi = require('joi');
-const { objectId } = require('./custom.validation');
+const { objectId} = require('./custom.validation');
 
 const createStore = {
   body: Joi.object().keys({
+    id_store: Joi.string().required(),
+    id_user: Joi.string().required().custom(objectId),
     store_name: Joi.string().required(),
-    store_category: Joi.string().required()
+    store_category: Joi.string().required(),
   }),
 };
 
 const getStores = {
   query: Joi.object().keys({
+    id_store: Joi.string(),
+    id_user: Joi.string(),
     store_name: Joi.string(),
     store_category: Joi.string(),
     sortBy: Joi.string(),
@@ -32,6 +36,7 @@ const updateStore = {
     .keys({
       store_name: Joi.string(),
       store_category: Joi.string(),
+      id_user: Joi.string(),
     })
     .min(1),
 };

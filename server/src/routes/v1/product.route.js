@@ -1,41 +1,38 @@
 const express = require('express');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
-const storeValidation = require('../../validations/store.validation');
-const storeController = require('../../controllers/store.controller');
+const productValidation = require('../../validations/product.validation');
+const productController = require('../../controllers/product.controller');
 
 const router = express.Router();
 
-// /v1/stores
 router
   .route('/')
-  .post(auth('manageStores'), validate(storeValidation.createStore), storeController.createStore)
-  .get(auth('getStores'), validate(storeValidation.getStores), storeController.getStores);
+  .post(auth('manageProducts'), validate(productValidation.createProduct), productController.createProduct)
+  .get(auth('getProducts'), validate(productValidation.getProducts), productController.getProducts);
 
-// /v1/stores/:storeId
-// ex: /v1/stores/c584dbe
 router
-  .route('/:storeId')
-  .get(auth('getStores'), validate(storeValidation.getStore), storeController.getStore)
-  .patch(auth('manageStores'), validate(storeValidation.updateStore), storeController.updateStore)
-  .delete(auth('manageStores'), validate(storeValidation.deleteStore), storeController.deleteStore);
+  .route('/:productId')
+  .get(auth('getProducts'), validate(productValidation.getProduct), productController.getProduct)
+  .patch(auth('manageProducts'), validate(productValidation.updateProduct), productController.updateProduct)
+  .delete(auth('manageProducts'), validate(productValidation.deleteProduct), productController.deleteProduct);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Stores
- *   description: Store management and retrieval
+ *   name: Products
+ *   description: Product management and retrieval
  */
 
 /**
  * @swagger
- * /stores:
+ * /products:
  *   post:
- *     summary: create a store
- *     description: Only admins can create other stores.
- *     tags: [Stores]
+ *     summary: Create a product
+ *     description: Only admins can create products.
+ *     tags: [Products]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -45,75 +42,83 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - id_store
- *               - id_user
- *               - store_name
- *               - store_category
+ *               - idStore
+ *               - idUser
+ *               - category
+ *               - title
+ *               - price
+ *               - stock
+ *               - description
+ *               - image
  *             properties:
- *               id_store:
+ *               idStore:
  *                 type: string
- *               id_user:
+ *               idUser:
  *                 type: string
- *               store_name:
+ *               category:
  *                 type: string
- *               store_category:
+ *               title:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               image:
  *                 type: string
  *             example:
- *               id_store: 001
- *               id_user: 6581c9316db0546e2407383f
- *               store_name: Test task
- *               store_category: enum store_category
+ *               idStore: storeId123
+ *               idUser: userId123
+ *               category: electronics
+ *               title: Laptop
+ *               price: 999.99
+ *               stock: 50
+ *               description: High-performance laptop
+ *               image: laptop_image.jpg
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Store'
+ *                $ref: '#/components/schemas/Product'
  *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all stores
- *     description: Only admins can retrieve all stores.
- *     tags: [Stores]
+ *     summary: Get all products
+ *     description: Only admins can retrieve all products.
+ *     tags: [Products]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: id_store
+ *         name: title
  *         schema:
  *           type: string
+ *         description: Product title
  *       - in: query
- *         name: id_user
+ *         name: price
  *         schema:
- *           type: string
- *       - in: query
- *         name: store_name
- *         schema:
- *           type: string
- *         description: Store name
- *      - in: query
- *         name: store_category
- *         schema:
- *           type: string
- *         description: Store Category
+ *           type: number
+ *         description: Product price
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *         description: sort by query in the form of field:desc/asc (ex. title:asc)
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of stores
+ *         description: Maximum number of products
  *       - in: query
  *         name: page
  *         schema:
@@ -132,7 +137,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Store'
+ *                     $ref: '#/components/schemas/Product'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -153,11 +158,11 @@ module.exports = router;
 
 /**
  * @swagger
- * /stores/{id}:
+ * /products/{id}:
  *   get:
- *     summary: Get a store
- *     description: Logged in stores can fetch only their own store information. Only admins can fetch other stores.
- *     tags: [Stores]
+ *     summary: Get a product
+ *     description: Logged in users can fetch product information.
+ *     tags: [Products]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -166,14 +171,14 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: Store id
+ *         description: Product id
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Store'
+ *                $ref: '#/components/schemas/Product'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -182,9 +187,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a store
- *     description: Logged in stores can only update their own information. Only admins can update other stores.
- *     tags: [Stores]
+ *     summary: Update a product
+ *     description: Only admins can update product information.
+ *     tags: [Products]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -193,7 +198,7 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: Store id
+ *         description: Product id
  *     requestBody:
  *       required: true
  *       content:
@@ -201,26 +206,40 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               idStore:
+ *                 type: string
+ *               idUser:
+ *                 type: string
+ *               category:
+ *                 type: string
  *               title:
  *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
  *               description:
  *                 type: string
- *               priority:
+ *               image:
  *                 type: string
  *             example:
- *               title: test task
- *               description: lorem ipsum
- *               priority: low
- *               dueDate: 29-10-2023
+ *               idStore: storeId123
+ *               idUser: userId123
+ *               category: electronics
+ *               title: Updated Laptop
+ *               price: 1099.99
+ *               stock: 60
+ *               description: High-performance laptop with updated features
+ *               image: updated_laptop_image.jpg
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Store'
+ *                $ref: '#/components/schemas/Product'
  *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -229,9 +248,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a store
- *     description: Logged in stores can delete only themselves. Only admins can delete other stores.
- *     tags: [Stores]
+ *     summary: Delete a product
+ *     description: Only admins can delete products.
+ *     tags: [Products]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -240,7 +259,7 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: Store id
+ *         description: Product id
  *     responses:
  *       "200":
  *         description: No content

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../utils/global';
 import AccountsPage from '../AccountsPage';
 import StoresPage from '../StoresPage';
+import { imgLogout } from '../../assets/app-icons';
 
 const DashboardPage = ()=>{
     // hooks
@@ -49,6 +50,12 @@ const DashboardPage = ()=>{
         }
     }
 
+    const handleLogout = () =>{
+        cookies.remove("refreshToken", {path: "/"})
+        cookies.remove("accessToken", {path: "/"})
+        navigate("/")
+    }
+
     // useEffect
     useEffect(()=>{
         if(!accessToken){
@@ -57,6 +64,9 @@ const DashboardPage = ()=>{
     }, [])
     return (
         <>
+                <div className="dashboard-navbar" onClick={handleLogout}>
+                    <img className="navbar-logout-img" src={imgLogout} />
+                </div>
                 <div className='dashboard-page'>
                     {
                         switchBoard(board)

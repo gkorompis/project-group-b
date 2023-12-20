@@ -46,6 +46,10 @@ export interface ProductCardProps {
 export interface AccountCardProps {
   data: any,
 }
+// componenets/StoreCard
+export interface StoreCardProps {
+  data: any,
+}
 
 // pages/AddToBasketPage 
 export interface AddToBasketPageProps {

@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../utils/global';
 import AccountsPage from '../AccountsPage';
+import StoresPage from '../StoresPage';
 
 const DashboardPage = ()=>{
     // hooks
@@ -37,7 +38,7 @@ const DashboardPage = ()=>{
             case "accounts":
                 return <AccountsPage/>
             case "stores":
-                return <h1>stores</h1>
+                return <StoresPage/>
             default:
                 return (<div className="dashboard-body">
                             <div className="dashboard-title">

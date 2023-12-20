@@ -7,6 +7,7 @@ import {
     reloadProductReducer,
     tokenReducer
 } from '../reducers';
+import storeReducer from '../reducers/storeReducer';
 
 
 const store = configureStore({
@@ -14,7 +15,8 @@ const store = configureStore({
         products:  productReducer,
         reloadProduct: reloadProductReducer,
         tokens: tokenReducer,
-        accounts: accountReducer
+        accounts: accountReducer,
+        stores: storeReducer
     },
     middleware: ()=> new Tuple(thunk)
 })

@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const LandingPage = ()=>{
 
     const navigate = useNavigate();
-
     const cookiesAll = cookies.getAll();
     const {accessToken} = cookiesAll;
 

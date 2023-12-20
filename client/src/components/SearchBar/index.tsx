@@ -1,11 +1,14 @@
+import { SearchBarProps } from "../../utils/types";
 import "./index.css"
 
-const SearchBar = () =>{
+const SearchBar = ({placeholderMessage}:SearchBarProps) =>{
+
+    const placeholder = placeholderMessage || "what's to buy ?"
     return (
         <>
             <div className="search-bar-div">
                 
-                <input className="search-bar" placeholder="what's to buy ?"/>
+                <input className="search-bar" placeholder={placeholder}/>
             </div>
         </>
     )

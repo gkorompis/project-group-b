@@ -8,6 +8,7 @@ import { tokenAction } from '../../actions';
 import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../utils/global';
+import AccountsPage from '../AccountsPage';
 
 const DashboardPage = ()=>{
     // hooks
@@ -34,7 +35,7 @@ const DashboardPage = ()=>{
             case "transactions":
                 return <TransactionsPage/>
             case "accounts":
-                return <h1>accounts</h1>
+                return <AccountsPage/>
             case "stores":
                 return <h1>stores</h1>
             default:

@@ -42,6 +42,10 @@ export interface ProductCardProps {
   handlers: any,
   states: any
 }
+// componenets/AccountCard
+export interface AccountCardProps {
+  data: any,
+}
 
 // pages/AddToBasketPage 
 export interface AddToBasketPageProps {
@@ -62,4 +66,15 @@ export interface ProductActionProps {
 }
 export interface TokenActionProps {
   reduxState?:any
+}
+
+//components/Searchbar
+export interface SearchBarProps {
+  placeholderMessage?: any
+}
+
+// components/EditAccountFrom 
+export interface EditAccountFrom {
+  handlers?: any,
+  states?: any
 }

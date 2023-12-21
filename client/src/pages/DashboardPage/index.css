@@ -9,7 +9,6 @@
     justify-content: center;
 
     overflow: auto;
-    
 }
 
 .page-navbar {
@@ -47,14 +46,17 @@
     padding-right: 6vh;
 }
 .navbar-logout-img{
-    height: 48px;
-    width: 48px;
+    height: 38px;
+    width: 38px;
     filter: invert(98%);
     cursor: pointer;
     transition: 0.3s;
 }
 .navbar-logout-img:hover {
-    height: 43px;
-    width: 43px;
+    height: 34px;
+    width: 34px;
     filter: invert(25%);
+}
+.navbar-img {
+    margin-left: 39px;
 }

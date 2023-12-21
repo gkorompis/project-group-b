@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { cookies } from '../../utils/global';
 import AccountsPage from '../AccountsPage';
 import StoresPage from '../StoresPage';
-import { imgLogout } from '../../assets/app-icons';
+import { imgLogout, imgReturn } from '../../assets/app-icons';
 
 const DashboardPage = ()=>{
     // hooks
@@ -50,6 +50,10 @@ const DashboardPage = ()=>{
         }
     }
 
+    const handleReturn = () =>{
+        setBoard("dashboard")
+    }
+
     const handleLogout = () =>{
         cookies.remove("refreshToken", {path: "/"})
         cookies.remove("accessToken", {path: "/"})
@@ -64,8 +68,9 @@ const DashboardPage = ()=>{
     }, [])
     return (
         <>
-                <div className="dashboard-navbar" onClick={handleLogout}>
-                    <img className="navbar-logout-img" src={imgLogout} />
+                <div className="dashboard-navbar" >
+                    <img className="navbar-img navbar-logout-img" src={imgReturn} onClick={handleReturn} />
+                    <img className="navbar-img navbar-logout-img" src={imgLogout} onClick={handleLogout} />
                 </div>
                 <div className='dashboard-page'>
                     {

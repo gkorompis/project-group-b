@@ -1,13 +1,14 @@
 import "./index.css"
 import {useEffect, useState} from 'react'
-import { SearchBar, ProductCard, EmptyCollection } from "../../components";
-import { imgBasket } from "../../assets/app-icons";
+import { SearchBar, ProductCard, EmptyCollection, SlidingBar } from "../../components";
+import { imgBasket} from "../../assets/app-icons";
 import {AddToBasketPage} from "..";
 
 import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../actions";
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../utils/global";
+import { TransactionMenuItems } from "../../utils/types";
 
 
 const TransactionsPage = () =>{
@@ -90,6 +91,11 @@ const TransactionsPage = () =>{
     const productError = selectorProduct && selectorProduct.error
     const productPayload = selectorProduct && selectorProduct.payload
     
+    const transactionsMenuItems = [
+        {field: "history", handler: ()=>null , image: "" },
+        {field: "baskets", handler: ()=>setIsBasket(true), image: "" }
+    ] as TransactionMenuItems[]
+
     console.log("productloading", productLoading)
     // hooks
     useEffect(()=>{
@@ -100,6 +106,7 @@ const TransactionsPage = () =>{
     return(
         <>
             <div className="transactions-page">
+                <SlidingBar items={transactionsMenuItems} page={"transactions"}/>
                 <div className="product-menu-bar">
                     <SearchBar/>
                 </div>

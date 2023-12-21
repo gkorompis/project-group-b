@@ -82,3 +82,15 @@ export interface EditAccountFrom {
   handlers?: any,
   states?: any
 }
+
+// components/slidingBar
+export interface SlidingBarProps<T> {
+  items?: T[],
+  page: string
+}
+
+export interface TransactionMenuItems {
+  field: string,
+  handler: any,
+  image?: any,
+}

@@ -115,3 +115,19 @@
 .order-checkout-span:hover{
     background-color: blueviolet;
 }
+
+.basket-close-img{
+    height: 30px;
+    width: 30px;
+    filter: invert(23%);
+    transition: 0.3s;
+}
+.basket-close-img:hover{
+    filter: invert(55%);
+}
+.add-to-basket-bar{
+    /* background-color: aqua; */
+    align-self: end;
+    margin-right: 40px;
+    cursor: pointer;
+}

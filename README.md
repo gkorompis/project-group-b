@@ -1,4 +1,4 @@
-# handpos
+# handpos project b
 
 ### Landing Page
 ![landing-page](https://github.com/gkorompis/project-group-b/assets/52250424/c2f87169-d9c7-468e-9d8c-3ff382c007e7)
@@ -16,3 +16,12 @@
 <img width="1383" alt="Screen Shot 2023-12-14 at 15 50 58" src="https://github.com/gkorompis/project-group-b/assets/52250424/b7d93158-f980-4045-86a5-0c88b53e4e61">
 
 <img width="1408" alt="Screen Shot 2023-12-19 at 00 53 41" src="https://github.com/gkorompis/project-group-b/assets/52250424/6f651e77-676a-4c14-868b-24abda71b9d2">
+
+### Accounts Page
+<img width="1383" alt="Screen Shot 2023-12-21 at 00 06 57" src="https://github.com/gkorompis/project-group-b/assets/52250424/9ffb6993-3ede-40e4-b1ff-a1e72ca41c81">
+
+### Accounts Edit Form
+<img width="1390" alt="Screen Shot 2023-12-21 at 00 07 13" src="https://github.com/gkorompis/project-group-b/assets/52250424/f33ef673-49fc-4ece-877b-3442b09d2a5a">
+
+### Stores Page
+<img width="1390" alt="Screen Shot 2023-12-21 at 00 07 27" src="https://github.com/gkorompis/project-group-b/assets/52250424/7a9e4db9-3491-4eef-a826-babb22d096c5">

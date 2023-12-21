@@ -42,11 +42,24 @@ export interface ProductCardProps {
   handlers: any,
   states: any
 }
+// componenets/AccountCard
+export interface AccountCardProps {
+  data: any,
+}
+// componenets/StoreCard
+export interface StoreCardProps {
+  data: any,
+}
 
 // pages/AddToBasketPage 
 export interface AddToBasketPageProps {
   handlers: any,
   states: any
+}
+// pages/HistoryPage 
+export interface HistoryPageProps {
+  handlers?: any,
+  states?: any
 }
 
 export interface BasketItem {
@@ -59,4 +72,42 @@ export interface BasketItem {
 // actions
 export interface ProductActionProps {
   reduxState?:any
+}
+export interface TokenActionProps {
+  reduxState?:any
+}
+
+//components/Searchbar
+export interface SearchBarProps {
+  placeholderMessage?: any
+}
+
+// components/EditAccountFrom 
+export interface EditAccountFrom {
+  handlers?: any,
+  states?: any
+}
+
+// components/DeleteAccountFrom 
+export interface DeleteAccountFrom {
+  handlers?: any,
+  states?: any
+}
+// components/DeleteStoreFrom 
+export interface DeleteStoreFrom {
+  handlers?: any,
+  states?: any
+}
+
+
+// components/slidingBar
+export interface SlidingBarProps<T> {
+  items?: T[],
+  page: string
+}
+
+export interface TransactionMenuItems {
+  field: string,
+  handler: any,
+  image?: any,
 }

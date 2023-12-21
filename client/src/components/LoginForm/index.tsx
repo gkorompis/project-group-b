@@ -3,29 +3,48 @@ import * as Yup from 'yup';
 import "./index.css"
 import { useNavigate } from 'react-router-dom';
 
+import axios from "axios"
+import { BASE_URL } from '../../utils/global';
+
+import { useDispatch } from 'react-redux';
+import { tokenAction } from '../../actions';
+
+
 const LoginForm = () => {
 
-  const navigate = useNavigate()
-  const handleLogin = ()=>{
-    // http post
-    // catch response
-    // navigate
-    navigate('/dashboard')
+
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogin = async (formData:any)=>{
+    try {
+      const response = await axios.post(`${BASE_URL}/auth/login`, formData);
+      console.log(">>> auth/login response:", response);
+
+      const data = response && response.data;
+      const tokens = data && data.tokens;
+      const reduxState = {tokens};
+      dispatch(tokenAction({reduxState}) as any)
+
+      navigate('/dashboard')
+    } catch(err){
+      console.log(err)
+    }
   }
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: ''
   }) as any
 
   interface FormErrors {
-    username?: string;
+    email?: string;
     password?: string;
     }
 
   const [errors, setErrors] = useState<FormErrors>({}) as any;
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required('This field required'),
+    email: Yup.string().email('Invalid email').required('This field is required'),
     password: Yup.string().required('This field required')
                 .min(8, 'Password must be at least 8 characters')
                 .matches(
@@ -49,12 +68,13 @@ const LoginForm = () => {
       .then(() => {
         console.log('Form submitted:', formData);
         setFormData({
-        username: '',
+        email: '',
         password: ''
       });
+
       setErrors({}); 
 
-      handleLogin()
+      handleLogin(formData)
 
       })
       .catch((validationErrors) => {
@@ -70,7 +90,7 @@ const LoginForm = () => {
     navigate("/")
   }
   const fields = [
-    {name: "username", type: "text", label: "Username", onChange: handleChange},
+    {name: "email", type: "email", label: "Email", onChange: handleChange},
     {name: "password", type: "password", label: "Password", onChange: handleChange}
   ]
   return (

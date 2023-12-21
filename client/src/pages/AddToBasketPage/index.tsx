@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../actions";
 import { productList } from "../../utils/data";
 import reloadProductAction from "../../actions/reloadProductAction";
+import { imgClose } from "../../assets/app-icons";
 
 
 const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
@@ -46,6 +47,7 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
         <>
             <div className="add-to-basket-page bg-blur">
                 <div className="add-to-basket-review">
+                    <div className="add-to-basket-bar"><img className="basket-close-img" src={imgClose} onClick={()=> setIsBasket(false)}/></div>
                     <p className="add-to-basket-logo-text">handpos</p>
                     <p className="add-to-basket-title-text">Order Summary</p>
                     <div className="order-card-deck">
@@ -62,8 +64,8 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
                     </div>
                      <div className="order-total">
                         <p className="order-total-text">Total</p>
-                        <p className="order-total-text">Rp. {totalItemPriceAll}</p>
-                        <span className="order-checkout-span order-total-text" onClick={()=> checkoutItems(totalItem)}>checkout</span>
+                        <p className="order-total-text">IDR {totalItemPriceAll}</p>
+                        <span className="order-checkout-span order-total-text" onClick={totalItem ? ()=> checkoutItems(totalItem) : ()=> null}>checkout</span>
                     </div>
                 </div>
             </div>
@@ -82,7 +84,7 @@ const OrderCard = ({data}:OrderCardProps) =>{
             <div className="order-card">
                 <div className="order-card-box order-card-counts">{addedItems}x</div>
                 <div className="order-card-box order-card-item">{itemName}</div>
-                <div className="order-card-box order-card-prices">Rp. {totalItemPrice}</div>
+                <div className="order-card-box order-card-prices"> {totalItemPrice}</div>
             </div>
         </>
     )

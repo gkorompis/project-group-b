@@ -4,9 +4,38 @@ const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { transactionService } = require('../services');
 
+const generateTransactionId = () => {
+  const timestamp = Date.now().toString(16); // Convert to hexadecimal
+  const randomValue = Math.floor(Math.random() * 16).toString(16); // Random value from 0 to 15 in hexadecimal
+  return `${timestamp}${randomValue}`.toUpperCase();
+};
+
 const createTransaction = catchAsync(async (req, res) => {
-  const transaction = await transactionService.createTransaction(req.body);
-  res.status(httpStatus.CREATED).send(transaction);
+  try {
+    const { idUser, idStore, products, transactionDate } = req.body;
+    
+    if (!idUser || !idStore || !products || !transactionDate) {
+      return res.status(httpStatus.BAD_REQUEST).send({ error: 'Semua field harus diisi.' });
+    }
+
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(httpStatus.BAD_REQUEST).send({ error: 'Produk tidak valid.' });
+    }
+
+    const transaction = {
+      idTransaction: generateTransactionId(),
+      idUser,
+      idStore,
+      products, // Now directly use the products array
+      transactionDate,
+    };
+
+   
+    const createdTransaction = await transactionService.createTransaction(transaction);
+    res.status(httpStatus.CREATED).send(createdTransaction);
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: 'Terjadi kesalahan server.' });
+  }
 });
 
 const getTransactions = catchAsync(async (req, res) => {
@@ -41,3 +70,4 @@ module.exports = {
   updateTransaction,
   deleteTransaction,
 };
+

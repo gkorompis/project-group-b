@@ -60,4 +60,6 @@ module.exports = {
   getProduct,
   updateProduct,
   deleteProduct,
+
 };
+

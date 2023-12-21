@@ -11,3 +11,8 @@
 
 ### Mobile View Transactions Page (view product as customer user)
 <img width="471" alt="Screen Shot 2023-12-13 at 22 47 22" src="https://github.com/gkorompis/project-group-b/assets/52250424/ca8f7dbc-640f-48f6-bf5c-7096cb9532a2">
+
+### Add To Basket Page
+<img width="1383" alt="Screen Shot 2023-12-14 at 15 50 58" src="https://github.com/gkorompis/project-group-b/assets/52250424/b7d93158-f980-4045-86a5-0c88b53e4e61">
+
+<img width="1408" alt="Screen Shot 2023-12-19 at 00 53 41" src="https://github.com/gkorompis/project-group-b/assets/52250424/6f651e77-676a-4c14-868b-24abda71b9d2">

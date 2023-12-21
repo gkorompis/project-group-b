@@ -6,3 +6,4 @@ module.exports.marketService = require('./market.service');
 module.exports.storeService = require('./store.service');
 module.exports.productService = require('./product.service');
 module.exports.transactionService = require('./transaction.service');
+

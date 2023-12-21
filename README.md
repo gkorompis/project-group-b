@@ -7,7 +7,7 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 ## Deliverables:
 - Project Themes: Industry, Innovation, and Infrastructure.
 - Purpose of the Project: UMKM One Click Solution
-- Description: One-click solution for simultaneous distribution to online stores.
+- Description: One-click solution for simultaneous distribution to UMKM stores.
 - Application Name: handpos
 
 ## Installation

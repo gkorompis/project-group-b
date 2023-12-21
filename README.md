@@ -33,6 +33,7 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 - CORS
 
 ## Run Locally
+- Backend:
 ```bash
   yarn dev
 ```

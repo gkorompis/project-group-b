@@ -93,6 +93,12 @@ export interface DeleteAccountFrom {
   handlers?: any,
   states?: any
 }
+// components/DeleteStoreFrom 
+export interface DeleteStoreFrom {
+  handlers?: any,
+  states?: any
+}
+
 
 // components/slidingBar
 export interface SlidingBarProps<T> {

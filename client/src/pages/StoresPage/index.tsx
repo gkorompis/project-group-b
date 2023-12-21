@@ -1,16 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import { EmptyCollection, SearchBar, StoreCard } from "../../components";
+import { EmptyCollection, SearchBar, SlidingBar, StoreCard } from "../../components";
 import "./index.css";
 import { cookies } from "../../utils/global";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { storeAction } from "../../actions";
+import { TransactionMenuItems } from "../../utils/types";
+import {DeleteStorePage, NewStorePage }from "..";
 
 const StoresPage = ()=>{
     // hooks
     const navigate = useNavigate();
     const cookiesAll = cookies.getAll();
     const {accessToken} = cookiesAll;
+
+    // states
+    const [isNewStoreForm, setIsNewStoreForm ] = useState(false);
+    const [isDeleteForm, setIsDeleteForm] = useState(false);
 
     // reduxs
     const dispatch = useDispatch();
@@ -22,6 +28,11 @@ const StoresPage = ()=>{
     const storePayload = selectorStore && selectorStore.payload;
     
     console.log(">>>storePayload", storePayload);
+
+    const storesMenuItems = [
+        {field: "new store", handler: ()=>setIsNewStoreForm(true), image: "" },
+        {field: "delete store", handler: ()=>setIsDeleteForm(true) , image: "" },
+    ] as TransactionMenuItems[]
 
     //useEffect
     useEffect(()=>{
@@ -35,6 +46,7 @@ const StoresPage = ()=>{
     return (
         <>
             <div className="stores-page">
+                <SlidingBar items={storesMenuItems} page={"stores"}/>
                 <div className="stores-menu-bar">
                     <SearchBar placeholderMessage={"Type store to search..."}/>
                 </div>
@@ -58,6 +70,22 @@ const StoresPage = ()=>{
                     }
                 </div>
             </div>
+            {
+                isNewStoreForm ? <NewStorePage
+                    handlers = {{
+                        setIsNewStoreForm
+                    }}
+                    />
+                : null
+            }
+            {
+                isDeleteForm ? <DeleteStorePage
+                    handlers = {{
+                        setIsDeleteForm
+                    }}
+                    />
+                : null
+            }
         </>
     )
 }

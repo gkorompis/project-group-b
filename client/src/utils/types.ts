@@ -56,6 +56,11 @@ export interface AddToBasketPageProps {
   handlers: any,
   states: any
 }
+// pages/HistoryPage 
+export interface HistoryPageProps {
+  handlers?: any,
+  states?: any
+}
 
 export interface BasketItem {
   addedItems: number,

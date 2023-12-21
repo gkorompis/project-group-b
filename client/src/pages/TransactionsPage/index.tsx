@@ -2,7 +2,7 @@ import "./index.css"
 import {useEffect, useState} from 'react'
 import { SearchBar, ProductCard, EmptyCollection, SlidingBar } from "../../components";
 import { imgBasket} from "../../assets/app-icons";
-import {AddToBasketPage} from "..";
+import {AddToBasketPage, HistoryPage} from "..";
 
 import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../actions";
@@ -25,6 +25,7 @@ const TransactionsPage = () =>{
     // states
     const [totalItem, setTotalItem] = useState(0);
     const [isBasket, setIsBasket] = useState(false);
+    const [isHistory, setIsHistory] = useState(false);
     const [basketItems, setBasketItems ] = useState([]);
 
     // handlers
@@ -92,12 +93,11 @@ const TransactionsPage = () =>{
     const productPayload = selectorProduct && selectorProduct.payload
     
     const transactionsMenuItems = [
-        {field: "history", handler: ()=>null , image: "" },
+        {field: "history", handler: ()=>setIsHistory(true) , image: "" },
         {field: "baskets", handler: ()=>setIsBasket(true), image: "" }
     ] as TransactionMenuItems[]
 
-    console.log("productloading", productLoading)
-    // hooks
+    // hooks)
     useEffect(()=>{
         console.log("!!!!! useEffect TransactionPage triggered")
         const token = accessToken
@@ -147,7 +147,18 @@ const TransactionsPage = () =>{
                 </div>  
             </div>
             {
-                isBasket ?   <AddToBasketPage handlers={handlersAddToBasketPage} states={states}/> : null
+                isBasket ?   <AddToBasketPage 
+                    handlers={handlersAddToBasketPage} 
+                    states={states}/> 
+                : null
+            }
+            {
+                isHistory ? <HistoryPage 
+                    handlers={{
+                        setIsHistory
+                    }} 
+                    states={undefined}/> 
+                : null
             }
            
 

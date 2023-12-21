@@ -2,6 +2,7 @@ import "./index.css"
 import {useState} from 'react'
 import { StoreCardProps } from "../../utils/types";
 import { imgStore } from "../../assets/app-icons";
+import { ManageStorePage } from "../../pages";
 // import EditStoreForm from "../EditStoreForm";
 
 const StoreCard = ({data}: StoreCardProps) =>{
@@ -35,8 +36,15 @@ const StoreCard = ({data}: StoreCardProps) =>{
             </div>
             {
                 isEditForm ? 
-                <div className="bg-blur store-card-edit-form" onClick={()=>setIsEditForm(!isEditForm)}>
-                    {/* <EditStoreForm handlers={handlers} states={states}/> */}
+                <div className="bg-blur manage-store-form">
+                    <ManageStorePage
+                        handlers={{
+                            setIsEditForm
+                        }}
+                        states ={{
+                            data
+                        }}
+                    />
                 </div> : null
             }
             

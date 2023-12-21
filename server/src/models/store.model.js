@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate} = require('./plugins');
-// const Schema = mongoose.Schema;
-const autoIncrement = require('mongoose-auto-increment');
+// const autoIncrement = require('mongoose-auto-increment');
 const { required } = require('joi');
-const {User} = require('./user.model');
 
-autoIncrement.initialize(mongoose.connection);
+// autoIncrement.initialize(mongoose.connection);
 
 const storeSchema = mongoose.Schema(
   {
     id_store: {
       type: String,
       default: 0,
+      unique: true,
       required: true,
       trim: true,
+      alias: "store_"
     },
     store_name: {
       type: String,
@@ -54,10 +54,10 @@ const storeSchema = mongoose.Schema(
 // add plugin that converts mongoose to json
 storeSchema.plugin(toJSON);
 storeSchema.plugin(paginate);
-storeSchema.plugin(autoIncrement.plugin, {
-  model: 'Store',
-  field: 'id_store'
-})
+// storeSchema.plugin(autoIncrement.plugin, {
+//   model: 'Store',
+//   field: 'id_store',
+// })
 
 /**
  * @typedef Store

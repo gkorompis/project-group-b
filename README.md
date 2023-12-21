@@ -32,6 +32,10 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 - Helmet HTTP Headers
 - CORS
 
+## Run Locally
+```bash
+  yarn dev
+```
 
 
 

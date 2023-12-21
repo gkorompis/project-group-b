@@ -269,11 +269,7 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 
 *Resource under `dev` are still in progress of development and not ready for staging or public access*
 
-
-
-
-# handpos project b
-
+## Screenshots (handpos browser view)
 ### Landing Page
 ![landing-page](https://github.com/gkorompis/project-group-b/assets/52250424/c2f87169-d9c7-468e-9d8c-3ff382c007e7)
 
@@ -293,6 +289,12 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 
 ### Accounts Page
 <img width="1383" alt="Screen Shot 2023-12-21 at 00 06 57" src="https://github.com/gkorompis/project-group-b/assets/52250424/9ffb6993-3ede-40e4-b1ff-a1e72ca41c81">
+
+## Deployment Link
+To deploy this project, access this link below:
+
+[Link text Here](https://link-url-here.org)
+
 
 ### Accounts Edit Form
 <img width="1390" alt="Screen Shot 2023-12-21 at 00 07 13" src="https://github.com/gkorompis/project-group-b/assets/52250424/f33ef673-49fc-4ece-877b-3442b09d2a5a">

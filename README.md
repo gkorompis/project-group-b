@@ -13,6 +13,19 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 - Description: One-click solution for simultaneous distribution to online stores.
 
 - Application Name: handpos
+
+## Installation
+
+- Clone the Repository:
+
+1. git clone `github url https code`
+2. open the clone folder
+
+- Install the depedencies:
+1. backend: `yarn install`
+2. frontend: ``
+
+- Setting up the environment variable `.env`
  
 
 

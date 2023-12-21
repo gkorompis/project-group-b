@@ -45,7 +45,12 @@ module.exports = router;
  *               - idTransaction
  *               - idUser
  *               - idStore
- *               - products
+ *               - idProduct
+ *               - category
+ *               - title
+ *               - price
+ *               - qty
+ *               - subtotal
  *               - transactionDate
  *             properties:
  *               idTransaction:
@@ -332,3 +337,4 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
+

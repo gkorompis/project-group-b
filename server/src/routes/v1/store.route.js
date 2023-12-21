@@ -45,14 +45,22 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - id_store
+ *               - id_user
  *               - store_name
  *               - store_category
  *             properties:
+ *               id_store:
+ *                 type: string
+ *               id_user:
+ *                 type: string
  *               store_name:
  *                 type: string
  *               store_category:
  *                 type: string
  *             example:
+ *               id_store: 001
+ *               id_user: 6581c9316db0546e2407383f
  *               store_name: Test task
  *               store_category: enum store_category
  *     responses:
@@ -76,6 +84,14 @@ module.exports = router;
  *     security:
  *       - bearerAuth: []
  *     parameters:
+ *       - in: query
+ *         name: id_store
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: id_user
+ *         schema:
+ *           type: string
  *       - in: query
  *         name: store_name
  *         schema:

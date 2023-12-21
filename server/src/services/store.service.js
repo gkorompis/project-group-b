@@ -57,7 +57,7 @@ const updateStoreById = async (storeId, updateBody) => {
  */
 const deleteStoreById = async (storeId) => {
   const store = await getStoreById(storeId);
-  if (!Store) {
+  if (!store) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Store not found');
   }
   await store.remove();

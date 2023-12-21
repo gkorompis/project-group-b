@@ -6,12 +6,18 @@ const createTransaction = {
     idTransaction: Joi.string().required(),
     idUser: Joi.string().required(),
     idStore: Joi.string().required(),
-    idProduct: Joi.string().required(),
-    category: Joi.string().required(),
-    title: Joi.string().required(),
-    price: Joi.string().required(),
-    qty: Joi.number().required(),
-    subtotal: Joi.number().required(),
+    products: Joi.array()
+      .items(
+        Joi.object({
+          idProduct: Joi.string().required(),
+          category: Joi.string().required(),
+          title: Joi.string().required(),
+          price: Joi.string().required(),
+          qty: Joi.number().required(),
+          subtotal: Joi.number().required(),
+        })
+      )
+      .required(),
     transactionDate: Joi.date().required(),
   }),
 };

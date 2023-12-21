@@ -88,6 +88,12 @@ export interface EditAccountFrom {
   states?: any
 }
 
+// components/DeleteAccountFrom 
+export interface DeleteAccountFrom {
+  handlers?: any,
+  states?: any
+}
+
 // components/slidingBar
 export interface SlidingBarProps<T> {
   items?: T[],

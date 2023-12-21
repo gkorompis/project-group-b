@@ -19,6 +19,7 @@ td {
     padding-block: 0px;
     text-align: left;
     color: #ffffffca;
+    font-family: "arcon-rounded";
 }
 
 th {
@@ -46,7 +47,7 @@ th:last-child {
 .chunks-row {
     padding-block: 10px;
     padding-inline: 20px;
-    font-size: 13px
+    font-size: 14px
 }
 
 .chunks-row-body {

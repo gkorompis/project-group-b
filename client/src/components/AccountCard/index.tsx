@@ -24,14 +24,14 @@ const AccountCard = ({data}: AccountCardProps) =>{
         <>
             <div className="account-card">
                 <div className="account-card-img-div">
-                    <img className="account-card-img" src={imgUser}/>
+                    <img className="account-card-img" src={imgUser} onClick ={handleEditForm}/>
                 </div>
-                <div className="account-card-info" onClick ={handleEditForm}>
+                <div className="account-card-info" >
                     <p className="account-card-text account-card-info-title">{fullname || "-"}</p>
                     <p className="account-card-text account-card-info-text">{role || "-"}</p>
-                    <p className="account-card-text account-card-info-text">{email || "-"}</p>
                     <p className="account-card-text account-card-info-text">{username || "-"}</p>
-                
+                    <p className="account-card-text account-card-info-text">{email || "-"}</p>
+                    <p className="account-card-text account-card-info-text">{id|| "-"}</p>
                 </div>
             </div>
             {

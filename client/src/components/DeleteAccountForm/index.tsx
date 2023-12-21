@@ -8,60 +8,53 @@ import { BASE_URL, cookies } from '../../utils/global';
 
 import { useDispatch } from 'react-redux';
 import { accountAction, tokenAction } from '../../actions';
-import { EditAccountFrom } from '../../utils/types';
+import { DeleteAccountFrom } from '../../utils/types';
 import { imgClose } from '../../assets/app-icons';
 
 
-const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
+const DeleteAccountForm = ({handlers, states}:DeleteAccountFrom) => {
   // cookies
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cookiesAll = cookies.getAll();
   const {accessToken, sessionId} = cookiesAll;
 
-  const {isEditForm, data} = states;
-  const {setIsEditForm} = handlers;
-
-  const id = data && data.id;
+  const {setIsDeleteForm} = handlers;
 
   const handleCloseForm = ()=>{
-    setIsEditForm(false)
+    setIsDeleteForm(false)
   }
   
-  const handleEditAccount = async (formData:any)=>{
+  const handleDeleteAccount = async (formData:any)=>{
     try {
-      setIsEditForm(!isEditForm)
       const token = accessToken;
       const config = {
           headers: {Authorization: `Bearer ${token}`}
         }
-      const responsePatch = await axios.patch(`${BASE_URL}/users/${id}`,formData, config);
-      console.log('>>> editForm response patch', {responsePatch})
+
+      const {id} = formData
+      const responsePatch = await axios.delete(`${BASE_URL}/users/${id}`, config);
+      console.log('>>> deleteForm response patch', {responsePatch})
       
       dispatch(accountAction({reduxState: {token}}) as any)
       dispatch({type: "RELOAD_PRODUCTS_LOADING"})
+      setIsDeleteForm(false);
     } catch(err){
       console.log(err)
     }
   }
   const [formData, setFormData] = useState({
-    fullname: data && data.fullname,
-    username: data && data.username,
-    email: data && data.email
+    id: "",
   }) as any
 
   interface FormErrors {
-    fullname?: string;
-    email?: string;
-    username?: string;
+      id?: string;
     }
 
   const [errors, setErrors] = useState<FormErrors>({}) as any;
 
   const validationSchema = Yup.object().shape({
-    fullname: Yup.string().required('This field is required'),
-    username: Yup.string().required('This field is required'),
-    email: Yup.string().email('Invalid email').required('This field is required')
+    id: Yup.string().required('This field is required'),
   });
 
   const handleChange = (e:any) => {
@@ -79,13 +72,12 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
       .then(() => {
         console.log('Form submitted:', formData);
         setFormData({
-        email: '',
-        password: ''
+        id: '',
       });
 
       setErrors({}); 
 
-      handleEditAccount(formData)
+      handleDeleteAccount(formData)
 
       })
       .catch((validationErrors) => {
@@ -101,9 +93,7 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
   //   navigate("/")
   // }
   const fields = [
-    {name: "fullname", type: "text", label: "Full Name", onChange: handleChange},
-    {name: "username", type: "text", label: "Username", onChange: handleChange},
-    {name: "email", type: "email", label: "Email", onChange: handleChange},
+    {name: "id", type: "text", label: "id", onChange: handleChange},
   ]
 
   return (
@@ -111,7 +101,7 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
       <div className='form-cancel-button'>
         <img className='form-cancel-logo' src={imgClose} onClick={handleCloseForm}/>
       </div>
-      <p className="form-title" onClick={()=> null}>Edit Account Info</p>
+      <p className="form-title" onClick={()=> null}>Enter id to delete</p>
       <form className="form-body" onSubmit={handleSubmit}>
         {
             fields.map((field:any, key:any)=>{
@@ -133,7 +123,7 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
             })
         }
         <button type="submit" className="form-button">
-          Edit
+          Delete
         </button>
 
       </form>
@@ -141,4 +131,4 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
   );
 };
 
-export default EditAccountForm;
+export default DeleteAccountForm;

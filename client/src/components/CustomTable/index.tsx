@@ -5,16 +5,16 @@ import React, {Fragment} from "react";
 
 const openLinkHandler = (link:any) =>{
     console.log("link", link)
-    window.open(link, '_blank');
+    window.open("dashboard", '_blank');
 }
 
 const ChunkTable=({data}:any)=>{
 
-    const defaultData = data || [ {"a": 1, "b": 2, "c": 3, "d": 4}, {"a": 5, "b": 6, "c": 8, "d": 9}];
+    const defaultData = data || [ {"a": 1, "b": 2, "c": 3, "status": "update"}, {"a": 5, "b": 6, "c": 8, "status": "update"}];
     console.log("table rendered again");
 
     const columns_name = Object.keys(defaultData[0]);
-    const column_url = "attachmentUrl";
+    const column_url = "status";
 
     return (
         <Fragment>
@@ -54,7 +54,7 @@ const ChunksRow=({row, columns, column_url}:any)=>{
         <Fragment>
             <tr className='chunks-row'>
                 {Object.keys(row).map( (name:any, index:any) => {
-                    return <td key={index} className={`chunks-row chunks-row-body  ${columns[index]==column_url? "row-link":""}`} onClick={columns[index]==column_url? ()=>openLinkHandler(row[columns[index]]): ()=> null}>{columns[index]==column_url? "click here":row[columns[index]]}</td>
+                    return <td key={index} className={`chunks-row chunks-row-body  ${columns[index]==column_url? "row-link":""}`} onClick={columns[index]==column_url? ()=>openLinkHandler(row[columns[index]]): ()=> null}>{row[columns[index]]}</td>
                 } )}
             </tr>
         </Fragment>

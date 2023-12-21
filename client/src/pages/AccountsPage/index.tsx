@@ -1,17 +1,24 @@
-import { AccountCard, EmptyCollection, SearchBar } from "../../components";
+import { AccountCard, EmptyCollection, RegisterForm, SearchBar, SlidingBar } from "../../components";
 import "./index.css"
 
 import { useNavigate } from "react-router-dom";
 import { cookies } from "../../utils/global";
 import { useDispatch, useSelector } from "react-redux";
 import { accountAction } from "../../actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { TransactionMenuItems } from "../../utils/types";
+import {NewAccountPage, DeleteAccountPage} from "..";
+
 
 const AccountsPage = () =>{
     // hooks
     const navigate = useNavigate();
     const cookiesAll = cookies.getAll();
     const {accessToken} = cookiesAll;
+
+    // states
+    const [isNewAccountForm , setIsNewAccountForm ] = useState(false);
+    const [isDeleteForm, setIsDeleteForm] = useState(false);
 
      // reduxs
     const dispatch = useDispatch();
@@ -23,6 +30,11 @@ const AccountsPage = () =>{
     const accountPayload = selectorAccount && selectorAccount.payload;
     console.log(">>>accountPayload", accountPayload);
 
+    const accountsMenuItems = [
+        {field: "new account", handler: ()=>setIsNewAccountForm(true) , image: "" },
+        {field: "delete account", handler: ()=>setIsDeleteForm(true), image: "" }
+    ] as TransactionMenuItems[]
+    
     //useEffect
     useEffect(()=>{
         if(!accessToken){
@@ -32,9 +44,11 @@ const AccountsPage = () =>{
             dispatch(accountAction({reduxState: {token}}) as any)
         } 
     }, [dispatch, selectorReload])
+
     return (
         <>
             <div className="accounts-page">
+                <SlidingBar items={accountsMenuItems} page={"accounts"}/>
                 <div className="accounts-menu-bar">
                     <SearchBar placeholderMessage={"Type name to search..."}/>
                 </div>
@@ -59,6 +73,21 @@ const AccountsPage = () =>{
                     
                 </div> */}
             </div>
+            {
+                isNewAccountForm ? <NewAccountPage 
+                    handlers = {{
+                        setIsNewAccountForm
+                    }}/>
+                : null
+            }
+            {
+                isDeleteForm ?  <DeleteAccountPage
+                    handlers = {{
+                        setIsDeleteForm
+                    }}
+                />
+                : null
+            }
         </>
     )
 }

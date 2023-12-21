@@ -1,6 +1,28 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
+const productSchema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    price: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    qty: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    _id: false, // Tidak menyertakan _id untuk sub-dokumen
+  }
+);
+
 const transactionSchema = mongoose.Schema(
   {
     idTransaction: {
@@ -19,34 +41,7 @@ const transactionSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    idProduct: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    category: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    price: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    qty: {
-      type: Number,
-      required: true,
-    },
-    subtotal: {
-      type: Number,
-      required: true,
-    },
+    products: [productSchema], 
     transactionDate: {
       type: Date,
       required: true,
@@ -57,7 +52,7 @@ const transactionSchema = mongoose.Schema(
   }
 );
 
-// add plugin that converts mongoose to json
+
 transactionSchema.plugin(toJSON);
 transactionSchema.plugin(paginate);
 
@@ -65,6 +60,5 @@ transactionSchema.plugin(paginate);
  * @typedef Transaction
  */
 const Transaction = mongoose.model('Transaction', transactionSchema);
-
 
 module.exports = Transaction;

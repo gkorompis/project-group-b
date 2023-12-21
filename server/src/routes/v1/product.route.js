@@ -271,4 +271,35 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
 
  */
-
+/**
+ * @swagger
+ * /products/store/{idStore}:
+ *   get:
+ *     summary: Get products by store
+ *     description: Logged in users can fetch all products for a specific store.
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idStore
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Store id
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */

@@ -34,9 +34,240 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 
 ## Run Locally
 - Backend:
-```bash
-  yarn dev
+  ```bash
+     yarn dev
+  ```
+- Frontend:
+  ```bash
+
+  ```
+
+## API Reference
+### AUTH PAGE
+#### REGISTRATION API
+```http
+  POST /v1/auth/register
 ```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `fullname` | `string` | **Required**|
+| `username` | `string` | **Required** |
+| `email` | `string` | **Required**|
+| `password` | `string` | **Required**|
+
+#### LOGIN API (Bearer Token **Required**)
+```http
+  POST /v1/auth/login
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | **Required**|
+| `password` | `string` | **Required**|
+
+### USER PAGE
+#### Create New User
+```http
+  POST /v1/users
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `fullname` | `string` | **Required**|
+| `username` | `string` | **Required** |
+| `email` | `string` | **Required**|
+| `password` | `string` | **Required**|
+| `role` | `string` | **Required** (admin or user)|
+
+#### GET USER DATA
+```http
+  GET /v1/users
+```
+#### GET USER DATA BY ID USER
+```http
+  GET /v1/users/:userId
+```
+#### UPDATE USER DATA BY USING ID USER
+```http
+  PATCH /v1/users/:userId
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `fullname` | `string` | **Required**|
+| `username` | `string` | **Required** |
+| `email` | `string` | **Required**|
+| `password` | `string` | **Required**|
+
+#### DELETE USER DATA BY USING ID USER
+```http
+  DELETE /v1/users/:userId
+```
+
+### STORE PAGE
+#### CREATE A NEW STORE
+```http
+  POST /v1/stores
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id_store` | `string` | **Required**|
+| `store_name` | `string` | **Required** |
+| `store_category` | `string` | **Required**|
+| `id_user` | `string` | **Required**|
+
+#### GET DATA STORE
+```http
+  GET /v1/stores
+```
+#### GET USER DATA BY ID STORE
+```http
+  GET /v1/stores/:storeId
+```
+
+#### UPDATE DATA STORE BY USING ID STORE
+```http
+  PATCH /v1/stores/:storeId
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `store_name` | `string` | **Required** |
+| `store_category` | `string` | **Required**|
+| `id_user` | `string` | **Required**|
+
+#### DELETE DATA STORE BY USING ID STORE
+```http
+  DELETE /v1/stores/:storeId
+```
+
+### MARKET PAGE
+#### CREATE A NEW MARKET
+```http
+  POST /v1/markets
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `title` | `string` | **Required**|
+
+#### GET DATA MARKET
+```http
+  GET /v1/markets
+```
+#### GET MARKET DATA BY USING ID MARKET
+```http
+  GET /v1/markets/:marketId
+```
+
+#### UPDATE MARKET DATA BY USING ID MARKET
+```http
+  PATCH /v1/markets/:marketId
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `title` | `string` | **Required**|
+
+#### DELETE MARKET DATA BY USING ID MARKET
+```http
+  DELETE /v1/markets/:marketId
+```
+
+### PRODUCT PAGE
+#### CREATE A NEW PRODUCT
+```http
+  POST /v1/products
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idStore` | `string` | **Required**|
+| `title` | `string` | **Required** |
+| `price` | `number` | **Required**|
+| `stock` | `number` | **Required**|
+| `description` | `string` | **Required**|
+| `image` | `string` | **Required**|
+
+#### GET DATA STORE
+```http
+  GET /v1/stores
+```
+#### GET STORE DATA BY ID STORE
+```http
+  GET /v1/stores/:storeId
+```
+
+#### UPDATE DATA STORE BY USING ID STORE
+```http
+  PATCH /v1/stores/:storeId
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idStore` | `string` | **Required**|
+| `title` | `string` | **Required** |
+| `price` | `number` | **Required**|
+| `stock` | `number` | **Required**|
+| `description` | `string` | **Required**|
+| `image` | `string` | **Required**|
+
+#### DELETE DATA STORE BY USING ID STORE
+```http
+  DELETE /v1/stores/:storeId
+```
+### TRANSACTION PAGE
+#### CREATE A NEW TRANSACTION
+```http
+  POST /v1/transactions
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idTransaction` | `string` | **Required**|
+| `idUser` | `string` | **Required** |
+| `idStore` | `number` | **Required**|
+| `idProduct` | `number` | **Required**|
+| `category` | `string` | **Required**|
+| `title` | `string` | **Required**|
+| `price` | `number` | **Required**|
+| `qty` | `number` | **Required**|
+| `subtotal` | `number` | **Required**|
+| `transactionDate` | `date` | **Required**|
+
+#### GET DATA TRANSACTION
+```http
+  GET /v1/transactions
+```
+#### GET DATA TRANSACTION BY ID TRANSACTION
+```http
+  GET /v1/transactions/:transactionId
+```
+
+#### UPDATE DATA TRANSACTION BY ID TRANSACTION
+```http
+  PATCH /v1/transactions/:transactionId
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idTransaction` | `string` | **Required**|
+| `idUser` | `string` | **Required** |
+| `idStore` | `number` | **Required**|
+| `idProduct` | `number` | **Required**|
+| `category` | `string` | **Required**|
+| `title` | `string` | **Required**|
+| `price` | `number` | **Required**|
+| `qty` | `number` | **Required**|
+| `subtotal` | `number` | **Required**|
+| `transactionDate` | `date` | **Required**|
+
+#### DELETE DATA TRANSACTION BY ID TRANSACTION
+```http
+  DELETE /v1/transactions/:transactionId
+```
+
+## TABLE RESOURCES
+
+| Resource | Status     | Description                |
+| :-------- | :------- | :------------------------- |
+| `USER` | `prod` | **None**|
+| `STORE` | `prod` | **None**|
+| `PRODUCT` | `prod` | **None**|
+| `TRANSACTION` | `prod` | **None**|
+| `MARKET` | `dev` | ****|
+
+*Resource under `dev` are still in progress of development and not ready for staging or public access*
 
 
 

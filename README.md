@@ -1,23 +1,18 @@
 # Group Final Project
-
 ## Problem Statement:
 Develop a digital solution that address a specific challenge within 1 of 17 UN Sustainable Development Goals (SDGs).
-
 ## Goals:
 To create a user-friendly applicaion that provide a meaningful solution without introducing unnecessary complexities for end-user.
 
 ## Deliverables:
 - Project Themes: Industry, Innovation, and Infrastructure.
-
 - Purpose of the Project: UMKM One Click Solution
 - Description: One-click solution for simultaneous distribution to online stores.
-
 - Application Name: handpos
 
 ## Installation
 
 - Clone the Repository:
-
 1. git clone `github url https code`
 2. open the clone folder
 
@@ -27,6 +22,15 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 
 - Setting up the environment variable `.env`
  
+## Features
+- NoSQL Database (MongoDB)
+- Passport Auth
+- Joi Validation
+- Swagger API Documentation
+- Yarn Depedencies
+- Dotenv and cross-env Environment
+- Helmet HTTP Headers
+- CORS
 
 
 

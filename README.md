@@ -293,7 +293,7 @@ To create a user-friendly applicaion that provide a meaningful solution without 
 ## Deployment Link
 To deploy this project, access this link below:
 
-[Link text Here](https://link-url-here.org)
+[Please Add Link Here](https://link-url-here.org)
 
 
 ### Accounts Edit Form

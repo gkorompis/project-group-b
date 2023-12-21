@@ -66,4 +66,5 @@ transactionSchema.plugin(paginate);
  */
 const Transaction = mongoose.model('Transaction', transactionSchema);
 
+
 module.exports = Transaction;

@@ -10,7 +10,7 @@ const createStore = catchAsync(async (req, res) => {
 });
 
 const getStores = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['store_name', 'store_category']);
+  const filter = pick(req.query, ['id_store','id_user','store_name','store_category',]);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await storeService.queryStores(filter, options);
   res.send(result);

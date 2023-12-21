@@ -59,18 +59,37 @@ module.exports = router;
  *                 type: string
  *               idStore:
  *                 type: string
- *               idProduct:
- *                 type: string
- *               category:
- *                 type: string
- *               title:
- *                 type: string
- *               price:
- *                 type: string
- *               qty:
- *                 type: number
- *               subtotal:
- *                 type: number
+ *               products:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   required:
+ *                     - idProduct
+ *                     - category
+ *                     - title
+ *                     - price
+ *                     - qty
+ *                     - subtotal
+ *                   properties:
+ *                     idProduct:
+ *                       type: string
+ *                     category:
+ *                       type: string
+ *                     title:
+ *                       type: string
+ *                     price:
+ *                       type: string
+ *                     qty:
+ *                       type: number
+ *                     subtotal:
+ *                       type: number
+ *                 example:
+ *                   - idProduct: "product123"
+ *                     category: "Electronics"
+ *                     title: "Smartphone"
+ *                     price: "500.00"
+ *                     qty: 2
+ *                     subtotal: 1000.00
  *               transactionDate:
  *                 type: string
  *                 format: date-time
@@ -78,12 +97,13 @@ module.exports = router;
  *               idTransaction: "123456"
  *               idUser: "user123"
  *               idStore: "store123"
- *               idProduct: "product123"
- *               category: "Electronics"
- *               title: "Smartphone"
- *               price: "500.00"
- *               qty: 2
- *               subtotal: 1000.00
+ *               products:
+ *                 - idProduct: "product123"
+ *                   category: "Electronics"
+ *                   title: "Smartphone"
+ *                   price: "500.00"
+ *                   qty: 2
+ *                   subtotal: 1000.00
  *               transactionDate: "2023-12-31T23:59:59.999Z"
  *     responses:
  *       "201":
@@ -317,3 +337,4 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
+

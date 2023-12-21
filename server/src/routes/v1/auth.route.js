@@ -28,7 +28,7 @@ module.exports = router;
  * @swagger
  * /auth/register:
  *   post:
- *     summary: Register as user
+ *     summary: Registration Page
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -37,11 +37,14 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - fullname
+ *               - username
  *               - email
  *               - password
  *             properties:
- *               name:
+ *               fullname:
+ *                 type: string
+ *               username:
  *                 type: string
  *               email:
  *                 type: string
@@ -53,7 +56,8 @@ module.exports = router;
  *                 minLength: 8
  *                 description: At least one number and one letter
  *             example:
- *               name: fake name
+ *               fullname: fake name
+ *               username: fake username
  *               email: fake@example.com
  *               password: password1
  *     responses:

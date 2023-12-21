@@ -1,0 +1,53 @@
+/* .App {
+  text-align: center;
+} */
+h1, h3 {
+  margin: 0px;
+  padding: 0px;
+}
+p {
+  margin: 0px;
+  padding: 0px;
+  color: aliceblue;
+}
+a {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: "font-league-spartan";
+  src: url("./assets/fonts/LeagueSpartan-Bold.otf") format('opentype')
+}
+@font-face {
+  font-family: "arcon";
+  src: url("./assets/fonts/Arcon-Regular.otf") format('opentype')
+}
+@font-face {
+  font-family: "arcon-rounded";
+  src: url("./assets/fonts/Arcon-Rounded-Regular.otf") format('opentype')
+}
+@font-face {
+  font-family: "glacial";
+  src: url("./assets/fonts/glacial.otf") format('opentype')
+}
+@font-face {
+  font-family: "glacial-bold";
+  src: url("./assets/fonts/glacial-bold.otf") format('opentype')
+}
+@font-face {
+  font-family: "hind-medium";
+  src: url("./assets/fonts/hind-medium.otf") format('opentype')
+}
+p {
+  font-family: "font-league-spartan";
+}
+.bg-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(19, 19, 19, 0.831);
+  backdrop-filter: blur(13px);
+}

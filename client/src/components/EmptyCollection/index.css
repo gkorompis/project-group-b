@@ -1,0 +1,25 @@
+.empty-collection-div {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aqua; */
+    padding: 0px;
+    margin: 0px;
+}
+.empty-collection-img {
+    padding: 0px;
+    margin-top: 13vh;
+    height: 150px;
+    width: 150px;
+    /* background-color: black; */
+}
+
+.empty-collection-text{
+    /* background-color: aqua; */
+    margin-top: 1vh;
+    font-size: 5vh;
+    font-family: "arcon-rounded";
+    color: rgba(28, 28, 28, 0.898);
+}

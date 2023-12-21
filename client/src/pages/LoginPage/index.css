@@ -1,0 +1,8 @@
+.login-page-container{
+    /* background-color: rgb(19, 81, 135); */
+    background-color: rgb(73, 171, 176);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

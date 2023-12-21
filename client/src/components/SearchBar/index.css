@@ -1,0 +1,13 @@
+.search-bar{
+    outline: none;
+    border: none;
+    height: 5vh;
+    width: 40vh;
+    border-radius: 200px;
+    padding: 10px;
+    padding-inline: 23px;
+    font-size: 26px;
+    font-family: "arcon-rounded";
+    color: rgb(51, 51, 51);
+    margin-top: 40px;
+}

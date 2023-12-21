@@ -1,0 +1,87 @@
+.account-card {
+    background-color: rgb(245, 245, 245);
+    height: 130px;
+    width: 289px;
+    border-radius: 4px;
+
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    cursor: pointer;
+}
+
+
+.account-card-img-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.account-card-img{
+    height: 90px;
+    width: 90px;
+}
+
+.account-card-info{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-top: 18px;
+}
+.account-card-text{
+    font-family: "arcon-rounded";
+    color: rgb(51, 51, 51);
+    margin-bottom: 3px;
+}
+.account-card-info-title{
+    font-size: 19px;
+    margin-bottom: 6px;
+    /* background-color: antiquewhite; */
+}
+.account-card-info-text{
+    font-size: 12px;
+}
+
+.account-card-add-div{
+    /* background-color: rgb(71, 118, 93); */
+    height: 40px;
+    width: 100px;
+    margin-top: 7px;
+
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.card-add-logo{
+    height: 35px;
+    width: 35px;
+    transition: 0.38s;
+    margin-right: 8px;
+}
+.card-add-logo:hover{
+    height: 43px;
+    width: 43px;
+}
+.card-add-quantity{
+    height: 37px;
+    width: 37px;
+    transition: 0.38s;
+    font-size: 18px;
+    border-radius: 50%;
+    background-color: rgb(68, 66, 66);
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'arcon-rounded';
+}
+.card-add-quantity:hover{
+    height: 44px;
+    width: 44px;
+    font-size: 22px;
+}
+.account-card-edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

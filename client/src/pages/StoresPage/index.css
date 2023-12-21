@@ -1,0 +1,22 @@
+.stores-page {
+    height: 100%;
+    background-color: rgb(73, 171, 176);
+}
+
+.stores-menu-bar {
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+}
+
+.stores-card-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 135px;
+    width: 90vw;
+    row-gap: 5vh;
+    /* background-color: black; */
+    height: 80vh;
+    max-height: 80vh;
+
+}

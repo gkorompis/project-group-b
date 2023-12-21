@@ -1,0 +1,100 @@
+.transactions-page{
+    height: 100%;
+    background-color: rgb(73, 171, 176);
+}
+.product-menu-bar{
+    height:20vh;
+    display: flex;
+    justify-content: center;
+}
+.product-card-deck{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 135px;
+    width: 90vw;
+    row-gap: 5vh;
+    /* background-color: black; */
+    height: 80vh;
+    max-height: 80vh;
+    
+}
+.card-deck-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.floating-div {
+    position: fixed;
+    bottom: 20px;
+    /* Adjust this value to change the distance from the bottom */
+    right: 20px;
+    /* Adjust this value to change the distance from the right */
+    /* background-color: #39393a; */
+    
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.floating-basket-div{
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.372);
+    background-color: rgb(63, 54, 90);
+    cursor: pointer;
+    padding: 15px;
+   
+}
+
+.floating-basket-logo{
+    height: 55px;
+    width: 55px;
+    transition: 0.3s;
+}
+.floating-basket-logo:hover {
+    height: 79px;
+    width: 79px;
+}
+
+.basket-count{
+    background-color: rgb(248, 247, 247);
+    height: 35px;
+    width: 35px;
+    align-self: end;
+    padding: 3px;
+    border-radius: 50%;
+    transform: translateY(30px) rotateZ(11deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+.basket-count-text{
+    margin: 0px;
+    padding: 0px;
+    font-family: "arcon-rounded";
+    font-size:22px;
+    color: rgb(35, 36, 36);
+    /* transform: translateY(-5px); */
+}
+@media screen and (max-width: 600px) {
+
+    .floating-basket-logo {
+        height: 45px;
+        width: 45px;
+    }
+        .floating-basket-logo:hover {
+            height: 63px;
+            width: 63px;
+        }
+
+    .basket-count {
+        height: 30px;
+        width: 30px;
+        transform: translateY(29px) rotateZ(11deg);
+    }
+
+    .basket-count-text {
+        font-size: 17px;
+    }
+}

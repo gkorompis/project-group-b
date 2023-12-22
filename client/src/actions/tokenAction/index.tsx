@@ -16,12 +16,9 @@ const tokenAction = ({reduxState}:TokenActionProps)=> async(dispatch:Dispatch) =
         dispatch({type: actionTypes.loading});
 
         const {tokens} = reduxState;
-
         const {access, refresh} = tokens || {};
-
         const accessToken = access && access.token;
         const refreshToken = refresh && refresh.token;
-
         const decoded = jwtDecode(accessToken);
         const sessionId = decoded && decoded.sub || ""
         
@@ -30,16 +27,24 @@ const tokenAction = ({reduxState}:TokenActionProps)=> async(dispatch:Dispatch) =
         cookies.set('sessionId', sessionId, {path: '/'})
 
         axios.defaults.headers.common = {'Authorization': `bearer ${accessToken}`}
-
         const config = {
           headers: {Authorization: `Bearer ${accessToken}`}
         }
+
         const responseGetProduct = await axios.get(`${BASE_URL}/users/${sessionId}`, config)
-        const {data} = responseGetProduct;
+        const responseGetOwnerStore = await axios.get(`${BASE_URL}/stores?id_user=${sessionId}`, config)
+
+        var {data} = responseGetProduct;
         console.log(">>>fetchedProfile", data)
         const sessionRole = data && data.role;
         cookies.set('sessionRole', sessionRole, {path: '/'})
 
+        var {data} = responseGetOwnerStore;
+        console.log(">>>fetchedProfile", data)
+        const results = data && data.results;
+        const sessionOwnerStore = results && results[0];
+        const sessionOwnerStoreId = sessionOwnerStore && sessionOwnerStore.id_store;
+        cookies.set('sessionOwnerStoreId', sessionOwnerStoreId, {path: '/'})
 
         const payload = {tokens}
         dispatch({type: actionTypes.success, payload})

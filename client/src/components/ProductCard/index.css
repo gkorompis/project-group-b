@@ -24,7 +24,7 @@
     /* background-color: aqua; */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start !important;
     padding-top: 10px;
 }
 .product-card-text{
@@ -33,11 +33,11 @@
     margin-bottom: 8px;
 }
 .product-card-info-title{
-    font-size: 19px;
+    font-size: 15px !important;
     /* background-color: antiquewhite; */
 }
 .product-card-info-price{
-    font-size: 15px;
+    font-size: 14px !important;
 }
 
 .product-card-add-div{

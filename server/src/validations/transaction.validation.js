@@ -3,21 +3,22 @@ const { objectId } = require('./custom.validation');
 
 const createTransaction = {
   body: Joi.object().keys({
-    idTransaction: Joi.string().required(),
+    // idTransaction: Joi.string().required(),
     idUser: Joi.string().required(),
     idStore: Joi.string().required(),
     products: Joi.array()
       .items(
         Joi.object({
           idProduct: Joi.string().required(),
-          category: Joi.string().required(),
+          // category: Joi.string().required(),
           title: Joi.string().required(),
-          price: Joi.string().required(),
+          // price: Joi.string().required(),
           qty: Joi.number().required(),
           subtotal: Joi.number().required(),
         })
       )
       .required(),
+    status: Joi.string().required(),
     transactionDate: Joi.date().required(),
   }),
 };
@@ -60,6 +61,7 @@ const updateTransaction = {
       qty: Joi.number().integer(),
       subtotal: Joi.number().integer(),
       transactionDate: Joi.date(),
+      status: Joi.string()
     })
     .min(1),
 };

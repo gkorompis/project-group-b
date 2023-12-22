@@ -8,13 +8,17 @@ const productSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    price: {
+    subtotal: {
       type: String,
       required: true,
       trim: true,
     },
     qty: {
       type: Number,
+      required: true,
+    },
+    idProduct: {
+      type: String,
       required: true,
     },
   },
@@ -27,7 +31,7 @@ const transactionSchema = mongoose.Schema(
   {
     idTransaction: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
       trim: true,
     },
@@ -37,6 +41,11 @@ const transactionSchema = mongoose.Schema(
       trim: true,
     },
     idStore: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    status: {
       type: String,
       required: true,
       trim: true,

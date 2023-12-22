@@ -63,10 +63,10 @@ export interface HistoryPageProps {
 }
 
 export interface BasketItem {
-  addedItems: number,
-  itemId: string,
-  itemName: string
-  totalItemPrice: number
+  idProduct: string,
+  title: string,
+  qty: number,
+  subtotal: number
 }
 
 // actions

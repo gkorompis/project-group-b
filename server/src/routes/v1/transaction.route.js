@@ -54,10 +54,10 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - idTransaction
  *               - idUser
  *               - idStore
  *               - products
+ *               - status
  *               - transactionDate
  *             properties:
  *               idTransaction:
@@ -80,11 +80,7 @@ module.exports = router;
  *                   properties:
  *                     idProduct:
  *                       type: string
- *                     category:
- *                       type: string
  *                     title:
- *                       type: string
- *                     price:
  *                       type: string
  *                     qty:
  *                       type: number
@@ -92,25 +88,23 @@ module.exports = router;
  *                       type: number
  *                 example:
  *                   - idProduct: "product123"
- *                     category: "Electronics"
  *                     title: "Smartphone"
- *                     price: "500.00"
  *                     qty: 2
  *                     subtotal: 1000.00
+ *               status:
+ *                 type: string
  *               transactionDate:
  *                 type: string
  *                 format: date-time
  *             example:
- *               idTransaction: "123456"
  *               idUser: "user123"
  *               idStore: "store123"
  *               products:
  *                 - idProduct: "product123"
- *                   category: "Electronics"
  *                   title: "Smartphone"
- *                   price: "500.00"
  *                   qty: 2
  *                   subtotal: 1000.00
+ *               status: "pending"
  *               transactionDate: "2023-12-31T23:59:59.999Z"
  *     responses:
  *       "201":

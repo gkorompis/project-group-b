@@ -15,7 +15,7 @@ const TransactionsPage = () =>{
     // hooks
     const navigate = useNavigate();
     const cookiesAll = cookies.getAll();
-    const {accessToken} = cookiesAll;
+    const {accessToken, sessionOwnerStoreId, sessionId} = cookiesAll;
 
     // reduxs
     const dispatch = useDispatch();
@@ -31,40 +31,40 @@ const TransactionsPage = () =>{
     // handlers
     const handleAddItem = ({title, price, quantity, uniqueId}:any) =>{
     
-        const fetchedProduct = basketItems.filter((x:any)=>x.itemId == uniqueId)[0] || {};
-        let {addedItems, totalItemPrice, itemId, itemName} = fetchedProduct;
+        const fetchedProduct = basketItems.filter((x:any)=>x.idProduct == uniqueId)[0] || {};
+        let {qty, subtotal, idProduct} = fetchedProduct;
 
-        const tempAddedItems = addedItems ? addedItems+1 : 1;
+        const tempAddedItems = qty ? qty+1 : 1;
         const tempTotalItemPrice = tempAddedItems * +price;
         
         const tempBasketItem = {
-            itemId: uniqueId,
-            itemName: title,
-            addedItems: tempAddedItems,
-            totalItemPrice: tempTotalItemPrice,
+            idProduct: uniqueId,
+            title: title,
+            qty: tempAddedItems,
+            subtotal: tempTotalItemPrice,
         }
 
         setBasketItems((prevState):any => {
-            prevState = fetchedProduct ? prevState.filter((x:any) => x.itemId !== uniqueId) : prevState
+            prevState = fetchedProduct ? prevState.filter((x:any) => x.idProduct !== uniqueId) : prevState
             return [...prevState, tempBasketItem];
         })    
     }
     const handleRemoveItem = ({title, price, quantity, uniqueId}:any) =>{
        
-        const fetchedProduct = basketItems.filter((x:any)=>x.itemId == uniqueId)[0] || {};
-        let {addedItems, totalItemPrice, itemId, itemName} = fetchedProduct;
+        const fetchedProduct = basketItems.filter((x:any)=>x.idProduct == uniqueId)[0] || {};
+        let {qty, subtotal} = fetchedProduct;
 
-        const tempAddedItems = addedItems ? addedItems-1 : 0;
+        const tempAddedItems = qty ? qty-1 : 0;
         const tempTotalItemPrice = tempAddedItems * +price;
         
         const tempBasketItem = {
-            itemId: uniqueId,
-            itemName: title,
-            addedItems: tempAddedItems,
-            totalItemPrice: tempTotalItemPrice,
+            idProduct: uniqueId,
+            title: title,
+            qty: tempAddedItems,
+            subtotal: tempTotalItemPrice,
         }
         setBasketItems((prevState):any => {
-            prevState = fetchedProduct ? prevState.filter((x:any) => x.itemId !== uniqueId) : prevState
+            prevState = fetchedProduct ? prevState.filter((x:any) => x.idProduct !== uniqueId) : prevState
             return tempAddedItems ?  [...prevState, tempBasketItem] : [...prevState];
         })  
     };
@@ -75,7 +75,9 @@ const TransactionsPage = () =>{
     // variables
     const states = {
         basketItems,
-        totalItem
+        totalItem,
+        sessionId,
+        sessionOwnerStoreId
     }
     const handlers = {
         handleAddItem,
@@ -99,9 +101,9 @@ const TransactionsPage = () =>{
 
     // hooks)
     useEffect(()=>{
-        console.log("!!!!! useEffect TransactionPage triggered")
-        const token = accessToken
-        dispatch(productAction({reduxState: {token}}) as unknown as any)
+        console.log("!!!!! useEffect TransactionPage triggered");
+        const token = accessToken;
+        dispatch(productAction({reduxState: {token, sessionOwnerStoreId}}) as unknown as any)
     }, [dispatch, selectorReloadProduct])
     return(
         <>
@@ -110,11 +112,7 @@ const TransactionsPage = () =>{
                 <div className="product-menu-bar">
                     <SearchBar/>
                 </div>
-                
                 {/* list products */}
-                
-                
-                    
                     {
                         productLoading ? <h1>loading...</h1> : 
                         productError ? <EmptyCollection/> :

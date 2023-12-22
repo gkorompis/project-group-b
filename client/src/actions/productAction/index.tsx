@@ -75,7 +75,7 @@ const productAction = ({reduxState}:ProductActionProps)=> async(dispatch:Dispatc
         dispatch({type: actionTypes.loading});
        
         // get route
-        const {token} = reduxState;
+        const {token, sessionOwnerStoreId} = reduxState;
         const config = {
           headers: {Authorization: `Bearer ${token}`}
         }
@@ -83,11 +83,10 @@ const productAction = ({reduxState}:ProductActionProps)=> async(dispatch:Dispatc
           key: "value"
         };
 
-        const responseGetProduct = await axios.get(`${BASE_URL}/products`, config)
+        const responseGetProduct = await axios.get(`${BASE_URL}/products/store/${sessionOwnerStoreId}`, config)
         console.log(">>>", {responseGetProduct})
         const {data} = responseGetProduct;
-        const listProducts = data && data.results;
-
+        const listProducts = data && data.results || (data[0] ? data : []);
         const payload = listProducts || dummyProducts;
         dispatch({type: actionTypes.success, payload})
         // console.log(">>>productAction",actionTypes.success)

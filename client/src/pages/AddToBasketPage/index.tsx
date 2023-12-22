@@ -13,10 +13,12 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
     const dispatch = useDispatch();
     const {setBasketItems, setIsBasket, setTotalItem} = handlers
 
+    const idUser = states && states.sessionId;
+    const idStore = states && states.sessionOwnerStoreId;
     const listBasketItems:BasketItem[] = states && states.basketItems;
     const totalItem = states && states.totalItem;
-    const totalItemPriceAll = listBasketItems && listBasketItems.reduce((acc:any, currentItem:any):any => {
-        return acc + currentItem.totalItemPrice;
+    const subtotalAll = listBasketItems && listBasketItems.reduce((acc:any, currentItem:any):any => {
+        return acc + currentItem.subtotal;
     }, 0);
 
     const checkoutItems = async (totalItem:any) =>{
@@ -24,13 +26,22 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
             return dispatch(productAction({}) as unknown as any);
             // return setIsBasket(false);
         }
+        // const checkoutDoc = {
+        //     titleProducts: listBasketItems,
+        //     prices: subtotalAll,
+        //     quantity: totalItem,
+        //     orderDate: new Date(),
+        //     links: "",
+        //     status: "paid"
+        // }
+
         const checkoutDoc = {
-            titleProducts: listBasketItems,
-            prices: totalItemPriceAll,
-            quantity: totalItem,
-            orderDate: new Date(),
-            links: "",
-            status: "paid"
+            idUser: idUser,
+            idStore: idStore,
+            products: [
+                listBasketItems
+            ],
+            transactionDate: new Date()
         }
         setTotalItem(0);
         setBasketItems([]);
@@ -64,7 +75,7 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
                     </div>
                      <div className="order-total">
                         <p className="order-total-text">Total</p>
-                        <p className="order-total-text">IDR {totalItemPriceAll}</p>
+                        <p className="order-total-text">IDR {subtotalAll}</p>
                         <span className="order-checkout-span order-total-text" onClick={totalItem ? ()=> checkoutItems(totalItem) : ()=> null}>checkout</span>
                     </div>
                 </div>
@@ -78,13 +89,13 @@ interface OrderCardProps {
 }
 
 const OrderCard = ({data}:OrderCardProps) =>{
-    const {totalItemPrice, itemId, itemName, addedItems} = data;
+    const {subtotal, idProduct, title, qty} = data;
     return (
         <>
             <div className="order-card">
-                <div className="order-card-box order-card-counts">{addedItems}x</div>
-                <div className="order-card-box order-card-item">{itemName}</div>
-                <div className="order-card-box order-card-prices"> {totalItemPrice}</div>
+                <div className="order-card-box order-card-counts">{qty}x</div>
+                <div className="order-card-box order-card-item">{title}</div>
+                <div className="order-card-box order-card-prices"> {subtotal}</div>
             </div>
         </>
     )

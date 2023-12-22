@@ -25,9 +25,9 @@ const StoreCard = ({data}: StoreCardProps) =>{
         <>
             <div className="store-card">
                 <div className="store-card-img-div">
-                    <img className="store-card-img" src={imgStore}/>
+                    <img className="store-card-img" src={imgStore} onClick ={handleEditForm}/>
                 </div>
-                <div className="store-card-info" onClick ={handleEditForm}>
+                <div className="store-card-info" >
                     <p className="store-card-text store-card-info-title">{store_name || "-"}</p>
                     <p className="store-card-text store-card-info-text">{store_category || "-"}</p>
                     <p className="store-card-text store-card-info-text">{id|| "-"}</p>

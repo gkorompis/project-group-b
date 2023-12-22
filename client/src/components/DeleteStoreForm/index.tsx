@@ -7,7 +7,7 @@ import axios from "axios"
 import { BASE_URL, cookies } from '../../utils/global';
 
 import { useDispatch } from 'react-redux';
-import { accountAction, tokenAction } from '../../actions';
+import { accountAction, storeAction, tokenAction } from '../../actions';
 import { DeleteStoreFrom } from '../../utils/types';
 import { imgClose } from '../../assets/app-icons';
 
@@ -17,7 +17,7 @@ const DeleteStoreForm = ({handlers, states}:DeleteStoreFrom) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cookiesAll = cookies.getAll();
-  const {accessToken, sessionId} = cookiesAll;
+  const {accessToken, sessionId, sessionRole} = cookiesAll;
 
   const {setIsDeleteForm} = handlers;
 
@@ -33,11 +33,11 @@ const DeleteStoreForm = ({handlers, states}:DeleteStoreFrom) => {
         }
 
       const {id} = formData
-      const responsePatch = await axios.delete(`${BASE_URL}/users/${id}`, config);
+      const responsePatch = await axios.delete(`${BASE_URL}/stores/${id}`, config);
       console.log('>>> deleteForm response patch', {responsePatch})
       
-      dispatch(accountAction({reduxState: {token}}) as any)
-      dispatch({type: "RELOAD_PRODUCTS_LOADING"})
+      dispatch(storeAction({reduxState: {token, sessionRole, sessionId}}) as any)
+      // dispatch({type: "RELOAD_PRODUCTS_LOADING"})
       setIsDeleteForm(false);
     } catch(err){
       console.log(err)

@@ -7,27 +7,36 @@ import axios from "axios"
 import { BASE_URL, cookies } from '../../utils/global';
 import { imgClose } from '../../assets/app-icons';
 import { useDispatch } from 'react-redux';
-import { accountAction } from '../../actions';
+import { accountAction, storeAction } from '../../actions';
 
 const NewStoreForm = ({handlers}:any) => {
+
+  const cookiesAll = cookies.getAll();
+  const {accessToken, sessionId, sessionRole} = cookiesAll;
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     store_name: "",
-    store_category: ""
+    store_category: "",
+    id_store: "",
+    id_user: sessionId,
   }) as any
 
   interface FormErrors {
     store_name?: string;
     store_category?: string;
+    id_store?: string;
+    id_user?: string;
     }
 
   const [errors, setErrors] = useState<FormErrors>({}) as any;
 
   const validationSchema = Yup.object().shape({
     store_name: Yup.string().required('This field is required'),
-    store_category: Yup.string().required('This field is required')
+    store_category: Yup.string().required('This field is required'),
+    id_store: Yup.string().required('This field is required'),
+    id_user: Yup.string().required('This field is required')
   });
   const {setIsNewStoreForm } = handlers
   const handleChange = (e:any) => {
@@ -46,21 +55,22 @@ const NewStoreForm = ({handlers}:any) => {
         console.log('Form submitted:', formData);
         setFormData({
         store_name: '',
-        store_category: ''
+        store_category: '',
+        id_store: "",
+        id_user: '',
       });
       // post route
       try {
-        const cookiesAll = cookies.getAll();
-        const {accessToken} = cookiesAll;
+        setIsNewStoreForm(false)
         const token = accessToken
         const config = {
           headers: {Authorization: `Bearer ${token}`}
         }
-        const response = await axios.post(`${BASE_URL}/users`, formData, config); 
+        const response = await axios.post(`${BASE_URL}/stores`, formData, config); 
         console.log(">>response", response)
-        dispatch(accountAction({reduxState: {token}}) as any)
-        dispatch({type: "RELOAD_PRODUCTS_LOADING"})
-        setIsNewStoreForm(false)
+        dispatch(storeAction({reduxState: {token, sessionId, sessionRole}}) as any)
+        // dispatch({type: "RELOAD_PRODUCTS_LOADING"})
+        
       } catch(err) {
         console.log(err)
       }
@@ -80,7 +90,9 @@ const NewStoreForm = ({handlers}:any) => {
   }
   const fields = [
     {name: "store_name", type: "text", label: "Store Name", onChange: handleChange},
-    {name: "store_category", type: "text", label: "Store Category", onChange: handleChange}
+    {name: "store_category", type: "text", label: "Store Category", onChange: handleChange},
+    {name: "id_store", type: "text", label: "Unique Id Store", onChange: handleChange},
+    {name: "id_user", type: "text", label: "Id User", onChange: handleChange}
   ]
   return (
     <div className="login-form">

@@ -51,7 +51,7 @@ const AccountsPage = () =>{
             <div className="accounts-page">
                 <SlidingBar items={accountsMenuItems} page={"accounts"}/>
                 <div className="accounts-menu-bar">
-                    <SearchBar placeholderMessage={"Type name to search..."}/>
+                    <SearchBar placeholderMessage={"Accounts"}/>
                    
                 </div>
                  {

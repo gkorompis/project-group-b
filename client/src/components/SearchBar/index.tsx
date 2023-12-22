@@ -7,8 +7,11 @@ const SearchBar = ({placeholderMessage}:SearchBarProps) =>{
     return (
         <>
             <div className="search-bar-div">
+                <div className="dashboard-title">
+                                <p className="dashboard-title-text">{placeholder}</p>
+                            </div>
                 
-                <input className="search-bar" placeholder={placeholder}/>
+                {/* <input className="search-bar" placeholder={placeholder}/> */}
             </div>
         </>
     )

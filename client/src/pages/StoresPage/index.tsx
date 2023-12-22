@@ -48,7 +48,7 @@ const StoresPage = ()=>{
             <div className="stores-page">
                 <SlidingBar items={storesMenuItems} page={"stores"}/>
                 <div className="stores-menu-bar">
-                    <SearchBar placeholderMessage={"Type store to search..."}/>
+                    <SearchBar placeholderMessage={"Stores"}/>
                 </div>
                 <div>
                     {

@@ -4,7 +4,7 @@ import { cookies } from "../../utils/global";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../actions";
-import { DeleteProductForm, EditProductForm, EditStoreInfoForm, EmptyCollection, InventoryCard, NewProductForm } from "../../components";
+import { DeleteProductForm, EditProductForm, EditStoreInfoForm, EmptyCollection, InventoryCard, LoadingFetching, NewProductForm } from "../../components";
 import { imgClose } from "../../assets/app-icons";
 
 const ManageStorePage = ({handlers, states}:any) =>{ 
@@ -51,7 +51,7 @@ const ManageStorePage = ({handlers, states}:any) =>{
                 <div className="manage-store-inventory">
                     <p className="manage-store-inventory-title">Store Inventory</p>
                     {
-                        productLoading ? <h1>loading...</h1> : 
+                        productLoading ? <LoadingFetching/> : 
                         productError ? <EmptyCollection/> :
                         <div className="inventory-card-deck">{
                             productPayload.map((x:any, key:any)=>{

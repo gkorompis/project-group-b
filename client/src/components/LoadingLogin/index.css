@@ -1,0 +1,26 @@
+@keyframes colorChange {
+    0% {
+        background-color: rgba(69, 66, 66, 0.37);
+        color: #93928c;
+    }
+
+    50% {
+        background-color: rgba(42, 41, 41, 0.651);
+        color: rgb(121, 116, 116);
+    }
+
+    100% {
+    background-color: rgba(69, 66, 66, 0.37);
+        color: #93928c;
+    }
+}
+.loading-div{
+    display: flex;
+    justify-content: center;
+}
+.loading-fetching{
+    /* animation: colorChange 2s linear infinite; */
+    width: 50%;
+    height: 10vh;
+    
+}

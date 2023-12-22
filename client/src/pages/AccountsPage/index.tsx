@@ -1,4 +1,4 @@
-import { AccountCard, EmptyCollection, RegisterForm, SearchBar, SlidingBar } from "../../components";
+import { AccountCard, EmptyCollection, LoadingFetching, RegisterForm, SearchBar, SlidingBar } from "../../components";
 import "./index.css"
 
 import { useNavigate } from "react-router-dom";
@@ -43,6 +43,7 @@ const AccountsPage = () =>{
             const token = accessToken
             dispatch(accountAction({reduxState: {token, sessionId, sessionRole}}) as any)
         } 
+        dispatch({type: "ACCOUNT_LOADING"})
     }, [dispatch, selectorReload])
 
     return (
@@ -51,9 +52,10 @@ const AccountsPage = () =>{
                 <SlidingBar items={accountsMenuItems} page={"accounts"}/>
                 <div className="accounts-menu-bar">
                     <SearchBar placeholderMessage={"Type name to search..."}/>
+                   
                 </div>
                  {
-                        accountLoading ? <h1>loading...</h1> : 
+                        accountLoading ? <LoadingFetching/> : 
                         accountError ? <EmptyCollection/> :
                         <div className="accounts-card-deck">{
                             accountPayload.map((x:any, key:any)=>{

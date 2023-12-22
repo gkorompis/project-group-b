@@ -1,6 +1,6 @@
 import "./index.css"
 import {useEffect, useState} from 'react'
-import { SearchBar, ProductCard, EmptyCollection, SlidingBar } from "../../components";
+import { SearchBar, ProductCard, EmptyCollection, SlidingBar, LoadingFetching } from "../../components";
 import { imgBasket} from "../../assets/app-icons";
 import {AddToBasketPage, HistoryPage} from "..";
 
@@ -105,6 +105,7 @@ const TransactionsPage = () =>{
         console.log("!!!!! useEffect TransactionPage triggered");
         const token = accessToken;
         dispatch(productAction({reduxState: {token, sessionOwnerStoreId}}) as unknown as any)
+        // dispatch({type: "PRODUCTS_LOADING"})
     }, [dispatch, selectorReloadProduct])
     return(
         <>
@@ -115,7 +116,7 @@ const TransactionsPage = () =>{
                 </div>
                 {/* list products */}
                     {
-                        productLoading ? <h1>loading...</h1> : 
+                        productLoading ? <LoadingFetching/> : 
                         productError ? <EmptyCollection/> :
                         <div className="product-card-deck">{
                             productPayload.map((x:any, key:any)=>{

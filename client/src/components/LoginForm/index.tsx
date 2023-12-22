@@ -8,6 +8,8 @@ import { BASE_URL } from '../../utils/global';
 
 import { useDispatch } from 'react-redux';
 import { tokenAction } from '../../actions';
+import LoadingLogin from '../LoadingLogin';
+import { SnackBarMui } from '..';
 
 
 const LoginForm = () => {
@@ -16,8 +18,12 @@ const LoginForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("")
   const handleLogin = async (formData:any)=>{
     try {
+      setIsLoading(true);
       const response = await axios.post(`${BASE_URL}/auth/login`, formData);
       console.log(">>> auth/login response:", response);
 
@@ -27,8 +33,15 @@ const LoginForm = () => {
       dispatch(tokenAction({reduxState}) as any)
 
       navigate('/dashboard')
-    } catch(err){
-      console.log(err)
+    } catch(err:any){
+      setIsLoading(false);
+      setOpenSnackBar(!openSnackBar);
+      const {response} = err
+      const errMessage = err && err.message;
+      const data = response && response.data;
+      const dataErrMessage = data && data.message;
+      const finalMessage = dataErrMessage || errMessage || "Server Error"
+      setErrorMessage(finalMessage)
     }
   }
   const [formData, setFormData] = useState({
@@ -94,6 +107,7 @@ const LoginForm = () => {
     {name: "password", type: "password", label: "Password", onChange: handleChange}
   ]
   return (
+    <>
     <div className="login-form">
       <p className="form-title" onClick={handleFormTitle}>handpos</p>
       <form className="form-body" onSubmit={handleSubmit}>
@@ -121,6 +135,16 @@ const LoginForm = () => {
         </button>
       </form>
     </div>
+        {
+          isLoading ? <LoadingLogin/> : null
+        }
+        {
+          openSnackBar ? <div>
+                <SnackBarMui openSnackBar={openSnackBar} setOpenSnackBar={setOpenSnackBar} message={errorMessage}/>
+            </div> : null
+        }
+    </>
+    
   );
 };
 

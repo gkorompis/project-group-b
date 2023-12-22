@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { EmptyCollection, SearchBar, SlidingBar, StoreCard } from "../../components";
+import { EmptyCollection, LoadingFetching, SearchBar, SlidingBar, StoreCard } from "../../components";
 import "./index.css";
 import { cookies } from "../../utils/global";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,7 +52,7 @@ const StoresPage = ()=>{
                 </div>
                 <div>
                     {
-                        storeLoading ? <h1>loading...</h1> : 
+                        storeLoading ? <LoadingFetching/>: 
                         storeError ? <EmptyCollection/> :
                         <div className="stores-card-deck">{
                             storePayload.map((x:any, key:any)=>{

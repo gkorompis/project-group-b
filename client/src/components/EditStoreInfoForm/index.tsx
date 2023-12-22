@@ -45,23 +45,23 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
     }
   }
   const [formData, setFormData] = useState({
-    fullname: data && data.fullname,
-    username: data && data.username,
-    email: data && data.email
+    store_name: data && data.store_name,
+    store_category: data && data.store_category,
+    id_user: data && data.id_user
   }) as any
 
   interface FormErrors {
-    fullname?: string;
-    email?: string;
-    username?: string;
+    store_name?: string;
+    id_user?: string;
+    store_category?: string;
     }
 
   const [errors, setErrors] = useState<FormErrors>({}) as any;
 
   const validationSchema = Yup.object().shape({
-    fullname: Yup.string().required('This field is required'),
-    username: Yup.string().required('This field is required'),
-    email: Yup.string().email('Invalid email').required('This field is required')
+    store_name: Yup.string().required('This field is required'),
+    store_category: Yup.string().required('This field is required'),
+    id_user: Yup.string().required('This field is required'),
   });
 
   const handleChange = (e:any) => {
@@ -79,7 +79,7 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
       .then(() => {
         console.log('Form submitted:', formData);
         setFormData({
-        email: '',
+        id_user: '',
         password: ''
       });
 
@@ -101,9 +101,9 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
   //   navigate("/")
   // }
   const fields = [
-    {name: "fullname", type: "text", label: "Full Name", onChange: handleChange},
-    {name: "username", type: "text", label: "Username", onChange: handleChange},
-    {name: "email", type: "email", label: "Email", onChange: handleChange},
+    {name: "store_name", type: "text", label: "store name", onChange: handleChange},
+    {name: "store_category", type: "text", label: "store category", onChange: handleChange},
+    {name: "id_user", type: "id_user", label: "id user", onChange: handleChange},
   ]
 
   return (

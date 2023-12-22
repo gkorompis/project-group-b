@@ -7,7 +7,7 @@
 }
 
 .table-history {
-    width: 600px;
+    width: 80vw;
     overflow: auto;
     padding: 50px;
     background-color: rgba(78, 79, 79, 0.826);

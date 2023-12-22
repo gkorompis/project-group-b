@@ -19,3 +19,5 @@ export { default as DeleteStoreForm } from './DeleteStoreForm'
 export { default as InventoryCard } from './InventoryCard'
 export { default as EditStoreInfoForm } from './EditStoreInfoForm'
 export { default as NewProductForm } from './NewProductForm'
+export { default as EditProductForm } from './EditProductForm'
+export { default as DeleteProductForm } from "./DeleteProductForm"

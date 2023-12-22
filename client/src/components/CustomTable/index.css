@@ -57,4 +57,19 @@ th:last-child {
 
 .row-link {
     cursor: pointer;
+    background-color: rgb(37, 31, 31);
+    font-family: "arcon-rounded";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.row-link:hover{
+    background-color: rgb(50, 47, 47);
+}
+.row-link:active{
+    background-color: rgb(134, 128, 128);
 }

@@ -5,47 +5,67 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from "axios"
 import { BASE_URL, cookies } from '../../utils/global';
-import { imgClose } from '../../assets/app-icons';
+
 import { useDispatch } from 'react-redux';
-import { accountAction, productAction } from '../../actions';
+import { accountAction, productAction, tokenAction } from '../../actions';
+import { EditAccountFrom } from '../../utils/types';
+import { imgClose } from '../../assets/app-icons';
 
-const NewStoreForm = ({handlers, states}:any) => {
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
+  // cookies
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cookiesAll = cookies.getAll();
+  const {accessToken, sessionId} = cookiesAll;
 
-  const {data}= states;
-  const idStore = data && data.id_store;
+  const { data, sessionOwnerStoreId} = states;
+  const {setIsEditProductForm} = handlers;
+
+  const id = data && data.id;
+
+  const handleCloseForm = ()=>{
+    setIsEditProductForm(false)
+  }
+  
+  const handleEditAccount = async (formData:any)=>{
+    try {
+      setIsEditProductForm(false)
+      const token = accessToken;
+      const config = {
+          headers: {Authorization: `Bearer ${token}`}
+        }
+      const responsePatch = await axios.patch(`${BASE_URL}/products/${id}`,formData, config);
+      console.log('>>> editForm response patch', {responsePatch})
+      
+      dispatch(productAction({reduxState: {token, sessionOwnerStoreId}}) as any)
+    } catch(err){
+      console.log(err)
+    }
+  }
   const [formData, setFormData] = useState({
-    idStore: idStore,
-    title: "",
-    price: "",
-    stock: "",
-    description: "",
-    image: "image.com"
+    title: data && data.title,
+    price: data && data.price,
+    stock: data && data.stock,
+    description: data && data.description
   }) as any
 
   interface FormErrors {
-    idStore?: string,
-    title?: string,
-    price?: string,
-    stock?: string,
-    description?: string,
-    image?: string
+    idStore?: string;
+    price?: string;
+    title?: string;
     }
 
   const [errors, setErrors] = useState<FormErrors>({}) as any;
-  console.log(">>>errors", errors)
 
   const validationSchema = Yup.object().shape({
-    idStore: Yup.string().required('This field is required'),
     title: Yup.string().required('This field is required'),
-    price: Yup.string().required('This field is required'),
-    stock: Yup.string().required('This field is required'),
-    description: Yup.string().required('This field is required'),
+    price: Yup.number().required('This field is required'),
+    stock: Yup.number().required('This field is required'),
+    description: Yup.string().required('This field is required')
+
   });
-  const {setIsNewProductForm } = handlers
-  const {sessionOwnerStoreId} = states;
+
   const handleChange = (e:any) => {
     const { name, value } = e.target;
     setFormData({
@@ -54,38 +74,21 @@ const NewStoreForm = ({handlers, states}:any) => {
     });
   };
 
-  const handleSubmit = async (e:any) => {
-    console.log("handlesubmit")
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     validationSchema
       .validate(formData, { abortEarly: false })
-      .then( async () => {
+      .then(() => {
         console.log('Form submitted:', formData);
         setFormData({
-        idStore: "",
-        title: "",
-        price: "",
-        stock: "",
-        image: "",
-        description: ""
+        price: '',
+        password: ''
       });
-      // post route
-      try {
-        console.log(">>>handlesubmit")
-        const cookiesAll = cookies.getAll();
-        const {accessToken} = cookiesAll;
-        const token = accessToken
-        const config = {
-          headers: {Authorization: `Bearer ${token}`}
-        }
-        const response = await axios.post(`${BASE_URL}/products`, formData, config); 
-        console.log(">>response create product", response)
-        dispatch(productAction({reduxState: {token, sessionOwnerStoreId}}) as any)
-        setIsNewProductForm(false)
-      } catch(err) {
-        console.log(err)
-      }
+
       setErrors({}); 
+
+      handleEditAccount(formData)
+
       })
       .catch((validationErrors) => {
         const formattedErrors = {} as any;
@@ -96,20 +99,22 @@ const NewStoreForm = ({handlers, states}:any) => {
       });
   };
   
-  const handleFormTitle = () =>{
-    navigate("/")
-  }
+  // const handleFormTitle = () =>{
+  //   navigate("/")
+  // }
   const fields = [
-    {name: "idStore", type: "text", label: "id store", onChange: handleChange},
     {name: "title", type: "text", label: "product name", onChange: handleChange},
     {name: "price", type: "text", label: "unit price", onChange: handleChange},
     {name: "stock", type: "text", label: "stock", onChange: handleChange},
     {name: "description", type: "text", label: "description", onChange: handleChange},
   ]
+
   return (
     <div className="login-form">
-      <div className="form-bar"><img className="basket-close-img" src={imgClose} onClick={()=> setIsNewProductForm(false)}/></div>
-      <p className="form-title" onClick={handleFormTitle}>handpos</p>
+      <div className='form-cancel-button'>
+        <img className='form-cancel-logo' src={imgClose} onClick={handleCloseForm}/>
+      </div>
+      <p className="form-title" onClick={()=> null}>Edit Account Info</p>
       <form className="form-body" onSubmit={handleSubmit}>
         {
             fields.map((field:any, key:any)=>{
@@ -131,11 +136,12 @@ const NewStoreForm = ({handlers, states}:any) => {
             })
         }
         <button type="submit" className="form-button">
-          New Product
+          Edit
         </button>
+
       </form>
     </div>
   );
 };
 
-export default NewStoreForm;
+export default EditAccountForm;

@@ -29,6 +29,7 @@ const TransactionsPage = () =>{
     const [basketItems, setBasketItems ] = useState([]);
 
     // handlers
+ 
     const handleAddItem = ({title, price, quantity, uniqueId}:any) =>{
     
         const fetchedProduct = basketItems.filter((x:any)=>x.idProduct == uniqueId)[0] || {};

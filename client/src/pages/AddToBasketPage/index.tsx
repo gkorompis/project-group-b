@@ -1,12 +1,12 @@
 import "./index.css"
-
+import axios from "axios";
 import { AddToBasketPageProps, BasketItem } from "../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
 import { productAction } from "../../actions";
 import { productList } from "../../utils/data";
 import reloadProductAction from "../../actions/reloadProductAction";
 import { imgClose } from "../../assets/app-icons";
-
+import { BASE_URL, cookies } from '../../utils/global';
 
 const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
     // reduxs
@@ -22,7 +22,9 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
     }, 0);
 
     const checkoutItems = async (totalItem:any) =>{
-        if (!totalItem) {
+        try {
+
+            if (!totalItem) {
             return dispatch(productAction({}) as unknown as any);
             // return setIsBasket(false);
         }
@@ -38,20 +40,32 @@ const AddToBasketPage = ({handlers, states}:AddToBasketPageProps) =>{
         const checkoutDoc = {
             idUser: idUser,
             idStore: idStore,
-            products: [
-                listBasketItems
-            ],
+            products:listBasketItems,
+            status: "pending",
             transactionDate: new Date()
         }
         setTotalItem(0);
         setBasketItems([]);
         setIsBasket(false);
-        console.log(">>>>checkoutDoc -", checkoutDoc)
+        console.log(">>>>checkoutDoc -", checkoutDoc);
+        
+        const cookiesAll = cookies.getAll();
+        const {accessToken} = cookiesAll;
+        const token = accessToken
+        const config = {
+          headers: {Authorization: `Bearer ${token}`}
+        }
+        const response = await axios.post(`${BASE_URL}/transactions`, checkoutDoc, config); 
+        console.log(">>>responsePost", response);
         const reduxState = productList
         // await dispatch(productAction({reduxState}) as unknown as any);
         dispatch({type: "PRODUCTS_LOADING"})
         dispatch(reloadProductAction(reduxState) as any)
         console.log(">>>addToBasketPage", "dispatch")
+        } catch (err) {
+            console.log("error at checkoutItems", {err})
+        }
+
     }
 
     return (

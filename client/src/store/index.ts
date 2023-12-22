@@ -3,6 +3,7 @@ import {thunk} from 'redux-thunk';
 
 import { 
     accountReducer,
+    historyReducer,
     productReducer,
     reloadProductReducer,
     tokenReducer
@@ -16,7 +17,8 @@ const store = configureStore({
         reloadProduct: reloadProductReducer,
         tokens: tokenReducer,
         accounts: accountReducer,
-        stores: storeReducer
+        stores: storeReducer,
+        history: historyReducer
     },
     middleware: ()=> new Tuple(thunk)
 })

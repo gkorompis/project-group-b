@@ -33,11 +33,11 @@
     margin-bottom: 8px;
 }
 .product-card-info-title{
-    font-size: 19px;
+    font-size: 14px ;
     /* background-color: antiquewhite; */
 }
 .product-card-info-price{
-    font-size: 15px;
+    font-size: 11px !important;
 }
 
 .product-card-add-div{

@@ -17,12 +17,15 @@ const storeAction = ({reduxState}:ProductActionProps)=> async(dispatch:Dispatch)
         dispatch({type: actionTypes.loading});
        
         // get route
-        const {token} = reduxState;
+        const {token, sessionId, sessionRole} = reduxState;
         const config = {
           headers: {Authorization: `Bearer ${token}`}
         }
 
-        const responseGetProduct = await axios.get(`${BASE_URL}/stores`, config)
+        const query = !(sessionRole == 'admin' || sessionRole == 'Admin' ) ? `id_user=${sessionId}` : ``;
+        console.log(">>>queryStore", query)
+
+        const responseGetProduct = await axios.get(`${BASE_URL}/stores?${query}`, config)
         console.log(">>>", {responseGetProduct})
         const {data} = responseGetProduct;
         console.log(">>> storeAction response ", {data})

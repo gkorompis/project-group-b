@@ -17,16 +17,20 @@ const accountAction = ({reduxState}:ProductActionProps)=> async(dispatch:Dispatc
         dispatch({type: actionTypes.loading});
        
         // get route
-        const {token} = reduxState;
+        const {token, sessionId, sessionRole} = reduxState;
         const config = {
           headers: {Authorization: `Bearer ${token}`}
         }
 
-        const responseGetProduct = await axios.get(`${BASE_URL}/users`, config)
-        console.log(">>>", {responseGetProduct})
-        const {data} = responseGetProduct;
+        const params = !(sessionRole == 'admin' || sessionRole == 'Admin' ) ? `${sessionId}` : ``;
+        console.log(">>>params", params)
+        const responseGetAccount = await axios.get(`${BASE_URL}/users/${params}`, config)
+        console.log(">>>", {responseGetAccount})
+        const {data} = responseGetAccount;
         console.log(">>> accountAction response ", {data})
-        const listAccounts = data && data.results;
+
+        const listAccounts = !(sessionRole == 'admin' || sessionRole == 'Admin' ) ? [data] : data && data.results;
+        console.log('>>>>listAccounts', listAccounts)
 
         const payload = listAccounts
         dispatch({type: actionTypes.success, payload})

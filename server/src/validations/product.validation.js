@@ -4,8 +4,6 @@ const { objectId } = require('./custom.validation');
 const createProduct = {
   body: Joi.object().keys({
     idStore: Joi.string().required(),
-    idUser: Joi.string().required().custom(objectId),
-    category: Joi.string().required(),
     title: Joi.string().required(),
     price: Joi.number().required(),
     stock: Joi.number().required(),
@@ -13,6 +11,18 @@ const createProduct = {
     image: Joi.string().required(),
   }),
 };
+// const createProduct = {
+//   body: Joi.object().keys({
+//     idStore: Joi.string().required(),
+//     idUser: Joi.string().required().custom(objectId),
+//     category: Joi.string().required(),
+//     title: Joi.string().required(),
+//     price: Joi.number().required(),
+//     stock: Joi.number().required(),
+//     description: Joi.string().required(),
+//     image: Joi.string().required(),
+//   }),
+// };
 
 const getProducts = {
   query: Joi.object().keys({

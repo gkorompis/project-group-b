@@ -1,7 +1,8 @@
 import { Dispatch } from "redux"
 import { TokenActionProps } from "../../utils/types";
 import axios from "axios";
-import { cookies } from "../../utils/global";
+import { BASE_URL, cookies } from "../../utils/global";
+import { jwtDecode } from "jwt-decode";
 
 const actionTypes = {
     loading: 'TOKEN_LOADING',
@@ -20,11 +21,25 @@ const tokenAction = ({reduxState}:TokenActionProps)=> async(dispatch:Dispatch) =
 
         const accessToken = access && access.token;
         const refreshToken = refresh && refresh.token;
+
+        const decoded = jwtDecode(accessToken);
+        const sessionId = decoded && decoded.sub || ""
         
         cookies.set('accessToken', accessToken, {path: '/'})
         cookies.set('refreshToken', refreshToken, {path: '/'})
+        cookies.set('sessionId', sessionId, {path: '/'})
 
         axios.defaults.headers.common = {'Authorization': `bearer ${accessToken}`}
+
+        const config = {
+          headers: {Authorization: `Bearer ${accessToken}`}
+        }
+        const responseGetProduct = await axios.get(`${BASE_URL}/users/${sessionId}`, config)
+        const {data} = responseGetProduct;
+        console.log(">>>fetchedProfile", data)
+        const sessionRole = data && data.role;
+        cookies.set('sessionRole', sessionRole, {path: '/'})
+
 
         const payload = {tokens}
         dispatch({type: actionTypes.success, payload})

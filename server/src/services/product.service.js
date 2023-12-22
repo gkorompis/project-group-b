@@ -35,6 +35,15 @@ const getProductById = async (id) => {
 };
 
 /**
+ * Get product by store id
+ * @param {ObjectId} id
+ * @returns {Promise<Product>}
+ */
+const getProductsByStoreId = async (idStore) => {
+  return Product.find({ idStore });
+};
+
+/**
  * Update product by id
  * @param {ObjectId} productId
  * @param {Object} updateBody
@@ -70,5 +79,6 @@ module.exports = {
   getProductById,
   updateProductById,
   deleteProductById,
+  getProductsByStoreId
 };
 

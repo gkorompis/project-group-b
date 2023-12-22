@@ -12,7 +12,7 @@ const StoresPage = ()=>{
     // hooks
     const navigate = useNavigate();
     const cookiesAll = cookies.getAll();
-    const {accessToken} = cookiesAll;
+    const {accessToken, sessionId, sessionRole} = cookiesAll;
 
     // states
     const [isNewStoreForm, setIsNewStoreForm ] = useState(false);
@@ -40,7 +40,7 @@ const StoresPage = ()=>{
             navigate("/")
         } else {
             const token = accessToken
-            dispatch(storeAction({reduxState: {token}}) as any)
+            dispatch(storeAction({reduxState: {token, sessionId, sessionRole}}) as any)
         } 
     }, [dispatch, selectorReload])
     return (

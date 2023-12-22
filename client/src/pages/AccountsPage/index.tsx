@@ -14,7 +14,7 @@ const AccountsPage = () =>{
     // hooks
     const navigate = useNavigate();
     const cookiesAll = cookies.getAll();
-    const {accessToken} = cookiesAll;
+    const {accessToken, sessionId, sessionRole} = cookiesAll;
 
     // states
     const [isNewAccountForm , setIsNewAccountForm ] = useState(false);
@@ -41,7 +41,7 @@ const AccountsPage = () =>{
             navigate("/")
         } else {
             const token = accessToken
-            dispatch(accountAction({reduxState: {token}}) as any)
+            dispatch(accountAction({reduxState: {token, sessionId, sessionRole}}) as any)
         } 
     }, [dispatch, selectorReload])
 

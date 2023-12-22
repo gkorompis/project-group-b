@@ -13,7 +13,7 @@ const generateTransactionId = () => {
 const createTransaction = catchAsync(async (req, res) => {
   try {
     const { idUser, idStore, products, transactionDate } = req.body;
-    
+
     if (!idUser || !idStore || !products || !transactionDate) {
       return res.status(httpStatus.BAD_REQUEST).send({ error: 'Semua field harus diisi.' });
     }
@@ -26,12 +26,12 @@ const createTransaction = catchAsync(async (req, res) => {
       idTransaction: generateTransactionId(),
       idUser,
       idStore,
-      products, // Now directly use the products array
+      products,
       transactionDate,
     };
 
-   
     const createdTransaction = await transactionService.createTransaction(transaction);
+
     res.status(httpStatus.CREATED).send(createdTransaction);
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: 'Terjadi kesalahan server.' });
@@ -70,4 +70,3 @@ module.exports = {
   updateTransaction,
   deleteTransaction,
 };
-

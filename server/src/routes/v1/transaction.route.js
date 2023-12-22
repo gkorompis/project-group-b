@@ -8,14 +8,26 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('createTransaction'), validate(transactionValidation.createTransaction), transactionController.createTransaction)
+  .post(
+    auth('createTransactions'),
+    validate(transactionValidation.createTransaction),
+    transactionController.createTransaction
+  )
   .get(auth('getTransactions'), validate(transactionValidation.getTransactions), transactionController.getTransactions);
 
 router
   .route('/:transactionId')
   .get(auth('getTransactions'), validate(transactionValidation.getTransaction), transactionController.getTransaction)
-  .patch(auth('manageTransactions'), validate(transactionValidation.updateTransaction), transactionController.updateTransaction)
-  .delete(auth('manageTransactions'), validate(transactionValidation.deleteTransaction), transactionController.deleteTransaction);
+  .patch(
+    auth('manageTransactions'),
+    validate(transactionValidation.updateTransaction),
+    transactionController.updateTransaction
+  )
+  .delete(
+    auth('manageTransactions'),
+    validate(transactionValidation.deleteTransaction),
+    transactionController.deleteTransaction
+  );
 
 module.exports = router;
 
@@ -45,12 +57,7 @@ module.exports = router;
  *               - idTransaction
  *               - idUser
  *               - idStore
- *               - idProduct
- *               - category
- *               - title
- *               - price
- *               - qty
- *               - subtotal
+ *               - products
  *               - transactionDate
  *             properties:
  *               idTransaction:
@@ -337,4 +344,3 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-

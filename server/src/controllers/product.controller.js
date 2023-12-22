@@ -34,10 +34,19 @@ const deleteProduct = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const getProductsByStore = catchAsync(async (req, res) => {
+  const products = await productService.getProductsByStoreId(req.params.idStore);
+  if (!products.length) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'No products found for this store');
+  }
+  res.send(products);
+});
+
 module.exports = {
   createProduct,
   getProducts,
   getProduct,
+  getProductsByStore,
   updateProduct,
   deleteProduct,
 };

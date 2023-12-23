@@ -8,17 +8,23 @@ import { BASE_URL, cookies } from '../../utils/global';
 import { imgClose } from '../../assets/app-icons';
 import { useDispatch } from 'react-redux';
 import { accountAction, storeAction } from '../../actions';
+import LoadingLogin from '../LoadingLogin';
+import { SnackBarMui } from '..';
 
 const NewStoreForm = ({handlers}:any) => {
 
   const cookiesAll = cookies.getAll();
   const {accessToken, sessionId, sessionRole} = cookiesAll;
+  const [isLoading, setIsLoading] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [severity, setSeverity] = useState("");
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     store_name: "",
-    store_category: "",
+    store_category: "Lainnya",
     id_store: "",
     id_user: sessionId,
   }) as any
@@ -55,23 +61,36 @@ const NewStoreForm = ({handlers}:any) => {
         console.log('Form submitted:', formData);
         setFormData({
         store_name: '',
-        store_category: '',
+        store_category: "",
         id_store: "",
         id_user: '',
       });
       // post route
       try {
-        setIsNewStoreForm(false)
+        
         const token = accessToken
         const config = {
           headers: {Authorization: `Bearer ${token}`}
         }
         const response = await axios.post(`${BASE_URL}/stores`, formData, config); 
+        setSeverity('success');
+        setIsLoading(false);
+        setOpenSnackBar(!openSnackBar);
+        setErrorMessage("create success!");
         console.log(">>response", response)
         dispatch(storeAction({reduxState: {token, sessionId, sessionRole}}) as any)
         // dispatch({type: "RELOAD_PRODUCTS_LOADING"})
+        setIsNewStoreForm(false)
         
-      } catch(err) {
+      } catch(err:any) {
+        setIsLoading(false);
+        setOpenSnackBar(!openSnackBar);
+        const {response} = err
+        const errMessage = err && err.message;
+        const data = response && response.data;
+        const dataErrMessage = data && data.message;
+        const finalMessage = dataErrMessage || errMessage || "Server Error"
+        setErrorMessage(finalMessage)
         console.log(err)
       }
       setErrors({}); 
@@ -95,6 +114,7 @@ const NewStoreForm = ({handlers}:any) => {
     {name: "id_user", type: "text", label: "Id User", onChange: handleChange}
   ]
   return (
+    <>
     <div className="login-form">
       <div className="form-bar"><img className="basket-close-img" src={imgClose} onClick={()=> setIsNewStoreForm(false)}/></div>
       <p className="form-title" onClick={handleFormTitle}>handpos</p>
@@ -123,6 +143,15 @@ const NewStoreForm = ({handlers}:any) => {
         </button>
       </form>
     </div>
+        {
+          isLoading ? <LoadingLogin/> : null
+        }
+        {
+          openSnackBar ? <div>
+                <SnackBarMui openSnackBar={openSnackBar} setOpenSnackBar={setOpenSnackBar} message={errorMessage}/>
+            </div> : null
+        }
+    </>
   );
 };
 

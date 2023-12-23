@@ -28,15 +28,21 @@ const SlidingBar = ({items, page}:SlidingBarProps<TransactionMenuItems>) =>{
                                 
                                 let defaultImage = image || imgRandom;
                                 const isNotAdmin = !(sessionRole=='admin' || sessionRole=="Admin")
-                                defaultImage = isNotAdmin ? imgLock : defaultImage
-                                const defaultHandler = handler || (()=>null)
+                                defaultImage = isNotAdmin ? imgLock : defaultImage;
+                                defaultImage = !(page == "accounts") ? imgRandom : defaultImage;
+
+                                let defaultHandler = handler || (()=>null);
+                                defaultHandler = isNotAdmin ? ()=>null : defaultHandler;
+                                defaultHandler = !(page == "accounts") ? handler : defaultHandler;
+
+
                                 return (
                                     <>
                                         <div className={"sliding-bar-menu-row  " + (isSliding ? "opacity-high" : "opacity-none")}>
                                             <img className="menu-row sliding-bar-menu-img" src={defaultImage}/>
                                             <p 
                                                 className={"menu-row sliding-bar-menu-text " + (isSliding ? "opacity-high" : "opacity-none")} 
-                                                onClick={isNotAdmin ? ()=>null : defaultHandler}>
+                                                onClick={defaultHandler}>
                                                 {field}
                                             </p>
                                         </div>

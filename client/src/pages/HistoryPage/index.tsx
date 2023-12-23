@@ -6,7 +6,7 @@ import { productAction } from "../../actions";
 import { productList } from "../../utils/data";
 import reloadProductAction from "../../actions/reloadProductAction";
 import { imgClose } from "../../assets/app-icons";
-import { CustomTable, EmptyCollection } from "../../components";
+import { CustomTable, EmptyCollection, LoadingFetching } from "../../components";
 import { useEffect } from "react";
 import { BASE_URL, cookies } from "../../utils/global";
 import {historyAction} from "../../actions";
@@ -58,9 +58,10 @@ const HistoryPage = ({handlers, states}:HistoryPageProps) =>{
                     <div className="table-history-bar"><img className="bar-close-img" src={imgClose} onClick={()=>setIsHistory(false)}/></div>
                     <p className="table-title">History</p>
                     {
-                        historyLoading ? <h1>loading...</h1> :
+                        historyLoading ? <LoadingFetching/> :
                         historyError ? <EmptyCollection/> :
-                        <CustomTable data={historyPayload} handlers={{handlePayment}}/>
+                        historyPayload[0] ? 
+                        <CustomTable data={historyPayload} handlers={{handlePayment}}/> : <EmptyCollection/>
                     }
                     
                 </div>  

@@ -54,6 +54,7 @@ const StoresPage = ()=>{
                     {
                         storeLoading ? <LoadingFetching/>: 
                         storeError ? <EmptyCollection/> :
+                        storePayload[0] ?
                         <div className="stores-card-deck">{
                             storePayload.map((x:any, key:any)=>{
                             // const fullname = x && x.fullname || "-"
@@ -66,7 +67,7 @@ const StoresPage = ()=>{
                                 )
                             })
                         }
-                        </div>
+                        </div> : <EmptyCollection/>
                     }
                 </div>
             </div>

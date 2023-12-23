@@ -111,7 +111,7 @@ const EditAccountForm = ({handlers, states}:EditAccountFrom) => {
       <div className='form-cancel-button'>
         <img className='form-cancel-logo' src={imgClose} onClick={handleCloseForm}/>
       </div>
-      <p className="form-title" onClick={()=> null}>Edit Account Info</p>
+      <p className="form-title" onClick={()=> null}>Edit Store Info</p>
       <form className="form-body" onSubmit={handleSubmit}>
         {
             fields.map((field:any, key:any)=>{

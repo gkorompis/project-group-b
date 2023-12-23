@@ -8,7 +8,7 @@ const LoadingFetching = () =>{
         <>
             <div className="loading-div">
                 <div className="loading-fetching">
-                    <LinearProgress color="inherit" />
+                    <LinearProgress color="secondary" />
                 </div>
             </div>
         </>
